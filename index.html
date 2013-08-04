@@ -305,7 +305,7 @@ conceptually, one must provide new kinds of glue in the programming language. ..
                                 </section>
                                 <section>
                                         <section>
-                                            <h2>Show Me The Code!</h2>
+                                            <h2>To The Demo!</h2>
                                             <img src="images/hand.png" width="500px" style="padding-top: 20px; padding-bottom: 20px;"/>
                                             <p><a href="http://tributary.io/inlet/6026457" target="_blank">http://tributary.io/inlet/6026457</a></p>      
                                         </section>  
@@ -328,7 +328,6 @@ conceptually, one must provide new kinds of glue in the programming language. ..
                                             <pre><code class="javascript">var list = ['Map', 'Filter', 'Fold'];
 var first = function(str) { return str.charAt(0); }
 
-// Imperative style
 var imperative = function(list, func) {
     result = [];
     for(var i = 0; i < list.length; i++) {
@@ -337,7 +336,6 @@ var imperative = function(list, func) {
     return result;
 }
 
-// Functional style
 var functional = function(list, func) {
     return _.map(list, func);
 }
@@ -353,25 +351,30 @@ functional(list, first);
                                                 <th>Language</th>
                                                 <th>Native Support</th>
                                                 <th>Syntax</th>
+                                                <th>Notes</th>
                                                 <tr>
                                                     <td class="bold">Clojure</td>
                                                     <td class="yes-cell">Yes</td>
                                                     <td>(map <em>func</em> <em>list</em>)</td>
+                                                    <td></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="bold">JavaScript</td>
                                                     <td class="yes-cell">1.6</td>
                                                     <td><em>array</em>.map(<em>func</em>)</td>
+                                                    <td>Function is passed element, its index and array.</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="bold">Python</td>
                                                     <td class="yes-cell">Yes</td>
                                                     <td>map(<em>func</em>, <em>list</em>)</td>
+                                                    <td>Returns list in 2, iterator in 3.</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="bold">Ruby</td>
                                                     <td class="yes-cell">Yes</td>
                                                     <td><em>enum</em>.map <em>{block}</em></td>
+                                                    <td></td>
                                                 </tr>
                                             </table>
                                             <p style="font-size: 45%; padding-top: 10px; float: left;">Source: <a href="http://en.wikipedia.org/wiki/Map_(higher-order_function)#Language_comparison" target="_blank">Wikipedia</a></p>
@@ -400,19 +403,79 @@ var map = function(func, list) {
                                         <section>
                                             <h2>Modus Operandi</h2>
                                             <ul>
-                                                <li></li>
+                                                <li>Applies a predicate to every element in a data structure</li>
+                                                <li>Produces a new data structure containing only those elements for which the predicate returned true</li>
                                             </ul>   
                                         </section>   
                                         <section>
                                             <h2>Imperative vs Functional</h2> 
-                                            <pre><code class="javascript">
-                                            </code></pre>  
+                                            <pre><code class="javascript">var list = ['Map', 'Filter', 'Fold'];
+var fWord = function(str) { 
+    return str.charAt(0).toLowerCase() === 'f';
+}
+
+var imperative = function(list, pred) {
+    result = [];
+    for(var i = 0; i < list.length; i++) {
+        if (pred(list[i])) { result.push(list[i]) }
+    }
+    return result;
+}
+
+var functional = function(list, pred) {
+    return _.filter(list, pred);
+}
+
+imperative(list, fWord);
+// ['Filter', 'Fold']
+functional(list, fWord);
+// ['Filter', 'Fold']                       </code></pre>  
                                         </section>    
                                         <section>
                                             <h2>Language Support</h2>
+                                                <table style="font-size: 45%; border: 1px" width="100%">
+                                                <th>Language</th>
+                                                <th>Native Support</th>
+                                                <th>Syntax</th>
+                                                <th>Notes</th>
+                                                <tr>
+                                                    <td class="bold">Clojure</td>
+                                                    <td class="yes-cell">Yes</td>
+                                                    <td>(filter <em>predicate</em> <em>list</em>)</td>
+                                                    <td>Can also filter with list comprehensions.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bold">JavaScript</td>
+                                                    <td class="yes-cell">1.6</td>
+                                                    <td><em>array</em>.filter(<em>pred</em>)</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bold">Python</td>
+                                                    <td class="yes-cell">Yes</td>
+                                                    <td>filter(<em>func</em>, <em>list</em>)</td>
+                                                    <td>Returns list or iterator (3.x). Also has list comprehensions.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bold">Ruby</td>
+                                                    <td class="yes-cell">Yes</td>
+                                                    <td><em>enum</em>.map <em>{block}</em></td>
+                                                    <td></td>
+                                                </tr>
+                                            </table>
+                                            <p style="font-size: 45%; padding-top: 10px; float: left;">Source: <a href="http://en.wikipedia.org/wiki/Filter_(higher-order_function)#Implementation" target="_blank">Wikipedia</a></p>
                                         </section>
                                         <section>
                                             <h2>Defining Filter</h2>
+                                            <pre><code class="javascript">
+var filter = function(pred, list) {
+    if (list.length === 0) return [];
+    return pred(list[0]) 
+      ? [list[0]].concat(filter(pred, list.slice(1)))
+      : filter(pred, list.slice(1));
+}
+                                            </code></pre> 
+<p style="font-size: 45%; padding-left: 30px; float: left;">* For illustrative purposes only. See Recursion chapter in <a href="http://shop.oreilly.com/product/0636920028857.do" target="_blank">Functional JavaScript</a>.</p>
                                         </section>
                                         <section>
                                             <h2>Visualising Filter</h2>
@@ -422,13 +485,14 @@ var map = function(func, list) {
                                 </section>
                                 <section>
                                         <section>
-                                            <h2>Fold/Reduce</h2>
+                                            <h2>Fold</h2>
                                             <img src="images/fold.png" width="500px" style="padding-top: 70px;"/>        
                                         </section>
                                         <section>
                                             <h2>Modus Operandi</h2>
                                             <ul>
-                                                <li></li>
+                                                <li>Also known as reduce, accumulate, aggregate, compress, or inject</li>
+                                                <li>Can be right associative or left associative</li>
                                             </ul>   
                                         </section>   
                                         <section>
