@@ -320,7 +320,48 @@ conceptually, one must provide new kinds of glue in the programming language. ..
                                             <img src="images/map.png" width="500px"/>        
                                         </section> 
                                         <section>
+                                            <h2>Modus Operandi</h2>
+                                            <ul>
+                                                <li>Applies given function to every element in a data structure</li>
+                                                <li>Produces a new data structure</li>
+                                                <li>Doesn't change the shape of the data structure</li>
+                                            </ul>   
+                                        </section>   
+                                        <section>
+                                            <h2>Imperative vs Functional</h2> 
+                                            <pre><code class="javascript">var list = ['Map', 'Filter', 'Fold'];
+var first = function(str) { return str.charAt(0); }
+
+// Imperative style
+var imperative = function(list, func) {
+    result = [];
+    for(var i = 0; i < list.length; i++) {
+        result.push(func(list[i]));
+    }
+    return result;
+}
+
+// Functional style
+var functional = function(list, func) {
+    return _.map(list, func);
+}
+
+imperative(list, first);
+// ['M', 'F', 'F']
+functional(list, first);
+// ['M', 'F', 'F']                          </code></pre>  
                                         </section>    
+                                        <section>
+                                            <h2>Language Support</h2>
+                                        </section>
+                                        <section>
+                                            <h2>Defining Map</h2>
+                                        </section>
+                                        <section>
+                                            <h2>Visualising Map</h2>
+                                            <img src="images/hand.png" width="500px" style="padding-top: 20px; padding-bottom: 20px;"/>
+                                            <p><a href="http://tributary.io/inlet/6026457" target="_blank">http://tributary.io/inlet/6026457</a></p>      
+                                        </section>
                                 </section>
                                 <section>
                                         <section>
@@ -328,15 +369,64 @@ conceptually, one must provide new kinds of glue in the programming language. ..
                                             <img src="images/filter.png" width="550px"/>        
                                         </section>   
                                         <section>
-                                        </section>  
+                                            <h2>Modus Operandi</h2>
+                                            <ul>
+                                                <li></li>
+                                            </ul>   
+                                        </section>   
+                                        <section>
+                                            <h2>Imperative vs Functional</h2> 
+                                            <pre><code class="javascript">
+                                            </code></pre>  
+                                        </section>    
+                                        <section>
+                                            <h2>Language Support</h2>
+                                        </section>
+                                        <section>
+                                            <h2>Defining Filter</h2>
+                                        </section>
+                                        <section>
+                                            <h2>Visualising Filter</h2>
+                                            <img src="images/hand.png" width="500px" style="padding-top: 20px; padding-bottom: 20px;"/>
+                                            <p><a href="http://tributary.io/inlet/6026457" target="_blank">http://tributary.io/inlet/6026457</a></p>      
+                                        </section>
                                 </section>
                                 <section>
                                         <section>
-                                            <h2>Fold</h2>
+                                            <h2>Fold/Reduce</h2>
                                             <img src="images/fold.png" width="500px" style="padding-top: 70px;"/>        
                                         </section>
                                         <section>
-                                        </section>     
+                                            <h2>Modus Operandi</h2>
+                                            <ul>
+                                                <li></li>
+                                            </ul>   
+                                        </section>   
+                                        <section>
+                                            <h2>Fold Left vs Fold Right</h2> 
+                                        </section> 
+                                        <section>
+                                            <h2>Recursive Pattern</h2>  
+                                        </section>   
+                                        <section>
+                                            <h2>Imperative vs Functional</h2> 
+                                            <pre><code class="javascript">
+                                            </code></pre>  
+                                        </section>    
+                                        <section>
+                                            <h2>Language Support</h2>
+                                        </section>
+                                        <section>
+                                            <h2>Defining Fold</h2>
+                                        </section>
+                                        <section>
+                                            <h2>Defining Map/Filter with Fold</h2>
+                                        </section>
+                                        <section>
+                                            <h2>Visualising Fold</h2>
+                                            <img src="images/hand.png" width="500px" style="padding-top: 20px; padding-bottom: 20px;"/>
+                                            <p><a href="http://tributary.io/inlet/6026457" target="_blank">http://tributary.io/inlet/6026457</a></p>      
+                                        </section>   
                                 </section>
                                 <section>
                                         <section>
