@@ -35,6 +35,7 @@
                         .yes-cell { background: #90ff90; }
                         .no-cell { background: #ff9090; }
                         .partial-cell { background: #ffb; }
+                        .bold { font-weight: bold !important; }
                         table { border-collapse: collapse !important; border: 1px solid #000 !important; }
                         table td { border: 1px solid #000 !important; text-align: center !important; }
                         table th { text-align: center !important; vertical-align: middle; !important;  } 
@@ -172,6 +173,7 @@ add(1, 2) + " Amigos";
                                         <section>
                                                 <pre><code data-noescape class="javascript"><span class="fragment fade-out" id="blackout" data-fragment-index="5">
 var impureAdd = function(arg1, arg2) {
+    assessSituation();
     if (warDeclared) {
         console.log("Impending doom...");
         launchMissile();
@@ -189,15 +191,18 @@ var impureAdd = function(arg1, arg2) {
                                                <span class="fragment explosion" id="explosion" style="position: absolute; top: 400px; left: 440px; z-index: 2;" data-fragment-index="4"><img src="images/explosion.gif"/></span></span>
                                         </section>  
                                         <section>
-                                            <img src="images/camouflage.jpg" width="768px"/>
+                                            <h2>Spot the Bug</h2>
+                                            <img src="images/camouflage.jpg" width="600px"/>
                                         </section>       
                                         <section>
                                             <img src="images/immutability.jpg" width="768px"/>
                                         </section>     
                                         <section>
+                                            <h2>First-Class Functions</h2>
                                             <img src="images/firstclass.jpg" width="768px"/>
                                         </section>     
                                         <section>
+                                            <h2>Closures</h2>
                                             <pre><code class="javascript">
 function startsWith(name) {
     var firstLetter = name.charAt(0);
@@ -220,8 +225,12 @@ languageName();
                                             <img src="images/oldidea.jpg" width="1000px"/>
                                         </section> 
                                         <section>
-                                            <img src="images/modularity.jpg" width="1000px"/>
+                                            <h2>Modularity</h2>
+                                            <img src="images/modularity.jpg" width="800px"/>
                                         </section> 
+                                        <section>
+                                            <img src="images/productionline.jpg" width="800px"/>
+                                        </section>
                                         <section>
                                             <h2>FP Glue</h2>
                                             <img src="images/glue.jpg" width="400px" style="float:left;" />
@@ -234,12 +243,20 @@ conceptually, one must provide new kinds of glue in the programming language. ..
                                         </section>
                                         <section>
                                             <h2>Higher-Order Functions (HOFs)</h2>
-                                            <div><img src="images/hoff.jpg" width="250px"/></div>  
+                                            <div><img src="images/hoff.jpg" width="300px"/></div>  
                                             <ul>
                                                 <li class="fragment">Take one or more functions as arguments, and/or</li>
                                                 <li class="fragment">Return a function as a result</li>
                                             </ul>                                        
-                                        </section>                                        
+                                        </section>  
+                                        <section>
+                                            <h2>Building Functions</h2>
+                                            <ul>
+                                                <li class="fragment">Function composition: <code>h(x) = f(g(x))</code></li>
+                                                <li class="fragment">Partial application: <code>f(1,2) //g(x,y,z)</code></li>
+                                                <li class="fragment">Currying: <code>f(1) //g(x)</code></li>
+                                            </ul>                                        
+                                        </section>                                       
                                         <section>
                                             <table style="font-size: 45%; border: 1px" width="100%">
                                                 <th>Language</th>
@@ -248,28 +265,28 @@ conceptually, one must provide new kinds of glue in the programming language. ..
                                                 <th>Higher-Order Functions</th>
                                                 <th>Partial Application</th>
                                                 <tr>
-                                                    <td>Clojure</td>
+                                                    <td class="bold">Clojure</td>
                                                     <td class="yes-cell">Yes</td>
                                                     <td class="yes-cell">Yes</td>
                                                     <td class="yes-cell">Yes</td>
                                                     <td class="yes-cell">Yes</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>JavaScript</td>
+                                                    <td class="bold">JavaScript</td>
                                                     <td class="yes-cell">Yes</td>
                                                     <td class="yes-cell">Yes</td>
                                                     <td class="yes-cell">Yes</td>
                                                     <td class="yes-cell">ECMAScript 5</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Python</td>
+                                                    <td class="bold">Python</td>
                                                     <td class="partial-cell">Partial; expressions only</td>
                                                     <td class="yes-cell">Yes</td>
                                                     <td class="yes-cell">Yes</td>
                                                     <td class="yes-cell">2.5</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Ruby</td>
+                                                    <td class="bold">Ruby</td>
                                                     <td class="yes-cell">Yes</td>
                                                     <td class="yes-cell">Yes</td>
                                                     <td class="partial-cell">Different syntax; restrictions</td>
