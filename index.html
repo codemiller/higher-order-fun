@@ -353,9 +353,42 @@ functional(list, first);
                                         </section>    
                                         <section>
                                             <h2>Language Support</h2>
+                                            <table style="font-size: 45%; border: 1px" width="100%">
+                                                <th>Language</th>
+                                                <th>Native Support</th>
+                                                <th>Syntax</th>
+                                                <tr>
+                                                    <td class="bold">Clojure</td>
+                                                    <td class="yes-cell">Yes</td>
+                                                    <td>(map <em>func</em> <em>list</em>)</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bold">JavaScript</td>
+                                                    <td class="yes-cell">1.6</td>
+                                                    <td><em>array</em>.map(<em>func</em>)</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bold">Python</td>
+                                                    <td class="yes-cell">Yes</td>
+                                                    <td>map(<em>func</em>, <em>list</em>)</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bold">Ruby</td>
+                                                    <td class="yes-cell">Yes</td>
+                                                    <td><em>enum</em>.map <em>{block}</em></td>
+                                                </tr>
+                                            </table>
+                                            <p style="font-size: 45%; padding-top: 10px; float: left;">Source: <a href="http://en.wikipedia.org/wiki/Map_(higher-order_function)#Language_comparison" target="_blank">Wikipedia</a></p>
                                         </section>
                                         <section>
                                             <h2>Defining Map</h2>
+                                            <pre><code class="javascript">
+var map = function(func, list) {
+    if (list.length === 0) return [];
+    return [func(list[0])].concat(map(func, list.slice(1)));
+}
+                                            </code></pre> 
+<p style="font-size: 45%; padding-left: 30px; float: left;">* For illustrative purposes only. See Recursion chapter in <a href="http://shop.oreilly.com/product/0636920028857.do" target="_blank">Functional JavaScript</a>.</p>
                                         </section>
                                         <section>
                                             <h2>Visualising Map</h2>
