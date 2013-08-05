@@ -515,23 +515,23 @@ var filter = function(pred, list) {
                                         <section>
                                             <h2>Recursive Pattern</h2> 
                                             <pre><code data-noescape class="javascript" id="highlighter">
-var sum = <span class="fragment highlight-bg-green" data-fragment-index="1" id="highlighted">function(list, startVal) {
+var sum = <span class="fragment highlight-bg-green" data-fragment-index="3" id="highlighted">function(list, startVal) {
     if (list.length === 0) { return startVal }</span>
-    return <span class="fragment highlight-bg-red" data-fragment-index="4">sum</span>(<span class="fragment highlight-bg-blue" data-fragment-index="7">list.slice(1)</span>, list[0] + startVal); 
+    return <span class="fragment highlight-bg-red" data-fragment-index="6">sum</span>(<span class="fragment highlight-bg-blue" data-fragment-index="9">list.slice(1)</span>, list[0] + startVal); 
 }
 sum([1, 2, 3], 0); // 6
 
-var length = <span class="fragment highlight-bg-green" data-fragment-index="2">function(list, startVal) {
+<span class="fragment" data-fragment-index="1">var length = <span class="fragment highlight-bg-green" data-fragment-index="4">function(list, startVal) {
     if (list.length === 0) { return startVal }</span>
-    return <span class="fragment highlight-bg-red" data-fragment-index="5">length</span>(<span class="fragment highlight-bg-blue" data-fragment-index="8">list.slice(1)</span>, 1 + startVal); 
+    return <span class="fragment highlight-bg-red" data-fragment-index="7">length</span>(<span class="fragment highlight-bg-blue" data-fragment-index="10">list.slice(1)</span>, 1 + startVal); 
 }
-length([1, 2, 3], 0); // 3
+length([1, 2, 3], 0); // 3</spam>
 
-var reverse = <span class="fragment highlight-bg-green" data-fragment-index="3">function(list, startVal) {
+<span class="fragment" data-fragment-index="2">var reverse = <span class="fragment highlight-bg-green" data-fragment-index="5">function(list, startVal) {
     if (list.length === 0) { return startVal }</span>
-    return <span class="fragment highlight-bg-red" data-fragment-index="6">reverse</span>(<span class="fragment highlight-bg-blue" data-fragment-index="9">list.slice(1)</span>, [list[0]].concat(startVal)); 
+    return <span class="fragment highlight-bg-red" data-fragment-index="8">reverse</span>(<span class="fragment highlight-bg-blue" data-fragment-index="11">list.slice(1)</span>, [list[0]].concat(startVal)); 
 }
-reverse([1, 2, 3], []); // [3, 2, 1]
+reverse([1, 2, 3], []); // [3, 2, 1]</span>
 
 </code></pre>                                               
                                         </section>  
