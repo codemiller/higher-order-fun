@@ -514,8 +514,8 @@ var filter = function(pred, list) {
                                         </section>   
                                         <section>
                                             <h2>Recursive Pattern</h2> 
-                                            <pre><code data-noescape class="javascript" id="highlighter">
-var sum = <span class="fragment highlight-bg-green" data-fragment-index="3" id="highlighted">function(list, startVal) {
+                                            <pre><code data-noescape class="javascript">
+var sum = <span class="fragment highlight-bg-green" data-fragment-index="3">function(list, startVal) {
     if (list.length === 0) { return startVal }</span>
     return <span class="fragment highlight-bg-red" data-fragment-index="6">sum</span>(<span class="fragment highlight-bg-blue" data-fragment-index="9">list.slice(1)</span>, list[0] + startVal); 
 }
@@ -536,13 +536,16 @@ reverse([1, 2, 3], []); // [3, 2, 1]</span>
 </code></pre>                                               
                                         </section>  
                                         <section>
+                                            <h2>Defining Fold</h2>
+                                            <pre><code data-noescape class="javascript">
+                                            </code></pre>
+                                        </section>
+                                        <section>
                                             <h2>Fold Left vs Fold Right</h2> 
                                         </section>  
                                         <section>
-                                            <h2>Imperative vs Functional</h2> 
-                                            <pre><code class="javascript">
-                                            </code></pre>  
-                                        </section>    
+                                            <h2>Defining Map/Filter with Fold</h2>
+                                        </section>   
                                         <section>
                                             <h2>Language Support</h2>
                                             <table style="font-size: 45%; border: 1px" width="100%">
@@ -576,16 +579,10 @@ reverse([1, 2, 3], []); // [3, 2, 1]</span>
                                                 </tr>
                                                 <tr>
                                                     <td style="font-size: 18px;"><em>Ruby Notes:</em></td>
-                                                    <td colspan="3" style="font-size: 15px;"><em>In Ruby, reduce also called inject. In 1.8.7+ a symbol can be passed instead of a block. If the enumeration is an array, use reverse instead of reverse_each.</td>
+                                                    <td colspan="3" style="font-size: 15px;"><em>In Ruby, reduce also called inject. In 1.8.7+ symbol can be passed instead of block. If enumeration is array, use reverse instead of reverse_each.</td>
                                                 </tr>
                                             </table>
                                             <p style="font-size: 45%; padding-top: 10px; float: left;">Source: <a href="http://en.wikipedia.org/wiki/Fold_(higher-order_function)#Folds_in_various_languages" target="_blank">Wikipedia</a></p>
-                                        </section>
-                                        <section>
-                                            <h2>Defining Fold</h2>
-                                        </section>
-                                        <section>
-                                            <h2>Defining Map/Filter with Fold</h2>
                                         </section>
                                         <section>
                                             <h2>Visualising Fold</h2>
