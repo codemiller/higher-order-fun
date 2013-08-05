@@ -326,12 +326,11 @@ conceptually, one must provide new kinds of glue in the programming language. ..
                                         <section>
                                             <h2>Imperative vs Functional</h2> 
                                             <pre><code class="javascript">var list = ['Map', 'Filter', 'Fold'];
-var first = function(str) { return str.charAt(0); }
 
-var imperative = function(list, func) {
+var imperative = function(list) {
     result = [];
     for(var i = 0; i < list.length; i++) {
-        result.push(func(list[i]));
+        result.push(list[i].charAt(0));
     }
     return result;
 }
@@ -340,9 +339,9 @@ var functional = function(list, func) {
     return _.map(list, func);
 }
 
-imperative(list, first);
+imperative(list);
 // ['M', 'F', 'F']
-functional(list, first);
+functional(list, function(str) { return str.charAt(0) });
 // ['M', 'F', 'F']                          </code></pre>  
                                         </section>    
                                         <section>
@@ -404,32 +403,31 @@ var map = function(func, list) {
                                             <h2>Modus Operandi</h2>
                                             <ul>
                                                 <li>Applies a predicate to every element in a data structure</li>
-                                                <li>Produces a new data structure containing only those elements for which the predicate returned true</li>
+                                                <li>Produces a new data structure containing only those elements for which the predicate function returns true</li>
                                             </ul>   
                                         </section>   
                                         <section>
                                             <h2>Imperative vs Functional</h2> 
                                             <pre><code class="javascript">var list = ['Map', 'Filter', 'Fold'];
-var fWord = function(str) { 
-    return str.charAt(0).toLowerCase() === 'f';
-}
-
-var imperative = function(list, pred) {
+var imperative = function(list, letter) {
     result = [];
     for(var i = 0; i < list.length; i++) {
-        if (pred(list[i])) { result.push(list[i]) }
+        if (list[i].charAt(0).toLowerCase() === letter) { 
+            result.push(list[i]) 
+        }
     }
     return result;
 }
-
 var functional = function(list, pred) {
     return _.filter(list, pred);
 }
-
-imperative(list, fWord);
-// ['Filter', 'Fold']
-functional(list, fWord);
-// ['Filter', 'Fold']                       </code></pre>  
+var startsWith = function(l) { 
+    return function(s) {
+        return s.charAt(0).toLowerCase() === l;
+    }
+}
+imperative(list, 'f');             // ['Filter', 'Fold']
+functional(list, startsWith('f')); // ['Filter', 'Fold']</code></pre>  
                                         </section>    
                                         <section>
                                             <h2>Language Support</h2>
