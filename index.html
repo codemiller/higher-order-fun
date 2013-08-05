@@ -504,12 +504,13 @@ var filter = function(pred, list) {
                                         <section>
                                             <h2>Modus Operandi</h2>
                                             <ul>
+                                                <li>A family of functions</li>
                                                 <li>AKA accumulate, aggregate, compress or inject</li>
-                                                <li>Can be left associative or right associative</li>
-                                                <li>Encapsulates a recursive pattern</li>
-                                                <li>Reduces a recursive data structure to a single value, which could itself be a data structure</li>
-                                                <li>Applies binary function to each element and a return value, or accumulator, that is built up as the structure is processed</li>
+                                                <li>Processes a recursive data structure and reduces it to a single value, which could itself be a data structure</li>
+                                                <li>Applies a combining function to each element of the structure and a return value, or accumulator, that is built up as the structure is processed</li>
                                                 <li>Accumulator can be given a starting value</li>
+                                                <li>Can be left associative or right associative</li>
+                                                <li>Can be strict or lazy</li>
                                             </ul>   
                                         </section>   
                                         <section>
@@ -542,6 +543,22 @@ reverse([1, 2, 3], []); // [3, 2, 1]</span>
                                         </section>
                                         <section>
                                             <h2>Fold Left vs Fold Right</h2> 
+                                            <table style="font-size: 45%; border: 1px" width="100%">
+                                                <th class="bold">Fold Left</th>
+                                                <th class="bold">Fold Right</th>
+                                                <tr>
+                                                    <td>Left associative</td>
+                                                    <td>Right associative</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Backwards</td>
+                                                    <td>Forwards</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Never works on infinite structures</td>
+                                                    <td>Can potentially work on infinite structures</td>
+                                                </tr>                                         
+                                            </table>
                                         </section>  
                                         <section>
                                             <h2>Defining Map/Filter with Fold</h2>
