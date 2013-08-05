@@ -516,21 +516,21 @@ var filter = function(pred, list) {
                                         <section>
                                             <h2>Recursive Pattern</h2> 
                                             <pre><code data-noescape class="javascript">
-var sum = <span class="fragment highlight-bg-green" data-fragment-index="3">function(list, startVal) {
-    if (list.length === 0) { return startVal }</span>
-    return <span class="fragment highlight-bg-red" data-fragment-index="6">sum</span>(<span class="fragment highlight-bg-blue" data-fragment-index="9">list.slice(1)</span>, list[0] + startVal); 
+var sum = <span class="fragment highlight-bg-green" data-fragment-index="3">function(list, initVal) {
+    if (list.length === 0) { return initVal }</span>
+    return <span class="fragment highlight-bg-red" data-fragment-index="6">sum</span>(<span class="fragment highlight-bg-blue" data-fragment-index="9">list.slice(1)</span>, list[0] + initVal); 
 }
 sum([1, 2, 3], 0); // 6
 
-<span class="fragment" data-fragment-index="1">var length = <span class="fragment highlight-bg-green" data-fragment-index="4">function(list, startVal) {
-    if (list.length === 0) { return startVal }</span>
-    return <span class="fragment highlight-bg-red" data-fragment-index="7">length</span>(<span class="fragment highlight-bg-blue" data-fragment-index="10">list.slice(1)</span>, 1 + startVal); 
+<span class="fragment" data-fragment-index="1">var length = <span class="fragment highlight-bg-green" data-fragment-index="4">function(list, initVal) {
+    if (list.length === 0) { return initVal }</span>
+    return <span class="fragment highlight-bg-red" data-fragment-index="7">length</span>(<span class="fragment highlight-bg-blue" data-fragment-index="10">list.slice(1)</span>, 1 + initVal); 
 }
 length([1, 2, 3], 0); // 3</spam>
 
-<span class="fragment" data-fragment-index="2">var reverse = <span class="fragment highlight-bg-green" data-fragment-index="5">function(list, startVal) {
-    if (list.length === 0) { return startVal }</span>
-    return <span class="fragment highlight-bg-red" data-fragment-index="8">reverse</span>(<span class="fragment highlight-bg-blue" data-fragment-index="11">list.slice(1)</span>, [list[0]].concat(startVal)); 
+<span class="fragment" data-fragment-index="2">var reverse = <span class="fragment highlight-bg-green" data-fragment-index="5">function(list, initVal) {
+    if (list.length === 0) { return initVal }</span>
+    return <span class="fragment highlight-bg-red" data-fragment-index="8">reverse</span>(<span class="fragment highlight-bg-blue" data-fragment-index="11">list.slice(1)</span>, [list[0]].concat(initVal));
 }
 reverse([1, 2, 3], []); // [3, 2, 1]</span>
 
@@ -555,8 +555,8 @@ reverse([1, 2, 3], []); // [3, 2, 1]</span>
                                                     <td>Forwards</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Never works on infinite structures</td>
-                                                    <td>Can potentially work on infinite structures</td>
+                                                    <td>Never works with infinite structures</td>
+                                                    <td>Can potentially work with infinite structures</td>
                                                 </tr>                                         
                                             </table>
                                         </section>  
@@ -606,6 +606,100 @@ reverse([1, 2, 3], []); // [3, 2, 1]</span>
                                             <img src="images/hand.png" width="500px" style="padding-top: 20px; padding-bottom: 20px;"/>
                                             <p><a href="http://tributary.io/inlet/6026457" target="_blank">http://tributary.io/inlet/6026457</a></p>      
                                         </section>   
+                                </section>
+                                <section>
+                                        <section>
+                                            <h2>Choose Your Own Adventure</h2> 
+                                            <img src="images/adventure.jpg" width="1000px"/>        
+                                        </section> 
+                                        <section> 
+                                            <h2>Real World Example</h2>
+                                            <img src="images/earth.svg" style="width: 400px;"/> 
+                                        </section>
+
+            <section>
+                <pre><code data-noescape class="java">void saveCat(final AnimalCallback&lt;Cat&gt; cb, final Cat cat) {
+    <span class="fragment highlight-bg-green" id="highlighter">try {
+        cb.begin();</span>
+        createRestClient(cb).updateCat(cat);
+    <span class="fragment highlight-bg-green">} catch (final Exception ex) {
+        cb.generalException(ex);
+    }</span>
+}
+
+void getCow(final AnimalCallback&lt;Cow&gt; cb, final int id) {
+    final String e = "{\"tail\":{\"type\": \""+ TAIL +"\"}}";
+    <span class="fragment highlight-bg-green">try {
+        cb.begin();</span>
+        createRestClient(cb).getCow(id, e);
+    <span class="fragment highlight-bg-green">} catch (final Exception ex) {
+        cb.generalException(ex);
+    }</span>
+}
+
+void saveDog(final AnimalCallback&lt;Dog&gt; cb, final Dog dog) {
+    <span class="fragment highlight-bg-green">try {
+        cb.begin();</span>
+        createRestClient(cb).updateDog(dog, BARK);
+    ...</code></pre>
+                <aside class="notes">
+                </aside>
+            </section>
+            <section>
+                <pre><code data-noescape class="java">interface Caller {
+    public void call() throws Exception;
+}
+
+&lt;T&gt; void doCall(AnimalCallback&lt;T&gt; cb, Caller restCaller) {
+    <span class="fragment highlight-bg-green" id="highlighter2">try {
+        cb.begin();</span>
+        restCaller.call();
+    <span class="fragment highlight-bg-green">} catch (final Exception e) {
+        cb.generalException(e);
+    }</span>
+}
+
+void saveCat(final AnimalCallback&lt;Cat&gt; cb, final Cat cat) {
+    doCall(cb, new Caller() {
+        @Override
+        public void call() throws Exception {
+            <span class="fragment highlight-bg-blue">createRestClient(cb).updateCat(cat);</span>
+        }
+    });
+}
+
+void getCow(final AnimalCallback&lt;Cow&gt; cb, final int id) {
+    ...</code></pre>
+                <aside class="notes">
+                </aside>
+            </section>
+            <section>
+                <pre><code data-noescape class="java">interface Caller {
+    public void call() throws Exception;
+}
+
+&lt;T&gt; void doCall(AnimalCallback&lt;T&gt; cb, Caller restCaller) {
+    try {
+        cb.begin();
+        restCaller.call();
+    } catch (final Exception e) {
+        cb.generalException(e);
+    }
+}
+
+void saveCat(AnimalCallback&lt;Cat&gt; cb, Cat cat) {
+    doCall(cb, <span class="fragment highlight-bg-blue" id="highlighter3">() -> createRestClient(cb).updateCat(cat)</span>);
+}
+
+void getCow(AnimalCallback&lt;Cow&gt; cb, int id) {
+    String e = "{\"tail\":{\"type\": \""+ TAIL +"\"}}";
+    doCall(cb, <span class="fragment highlight-bg-blue">() -> createRestClient(cb).getCow(id, e)</span>);
+}
+
+...</code></pre>
+                <aside class="notes">
+                </aside>
+            </section>
                                 </section>
                                 <section>
                                         <section>
@@ -690,6 +784,13 @@ reverse([1, 2, 3], []); // [3, 2, 1]</span>
                                     setTimeout(function() { Reveal.nextFragment(); }, 3000); 
                                 }, 1400);  
                             }
+                            if (event.fragment === document.getElementById('highlighter')) {
+                                for (var i = 0; i < 4; i++) {
+                                    Reveal.nextFragment();
+                                }
+                            }
+                            if (event.fragment === document.getElementById('highlighter2')) { Reveal.nextFragment(); }
+                            if (event.fragment === document.getElementById('highlighter3')) { Reveal.nextFragment(); }
                         });
 
 		</script>
