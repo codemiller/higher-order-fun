@@ -539,6 +539,32 @@ reverse([1, 2, 3], []); // [3, 2, 1]</span>
                                         <section>
                                             <h2>Defining Fold</h2>
                                             <pre><code data-noescape class="javascript">
+var foldL = function(func, initVal, list) {
+    if (list.length === 0) { return initVal }
+    return foldL(func, func(initVal, list[0]), list.slice(1))
+}
+foldL(function(acc, x) { return acc + x }, 0, [1,2,3]);
+// 6
+
+var foldR = function(func, initVal, list) {
+    if (list.length === 0) { return initVal }
+    return func(list[0], foldR(func, initVal, list.slice(1)))
+}
+foldR(function(x, acc) { return x + acc }, 0, [1,2,3]);
+// 6
+                                            </code></pre>
+                                        </section>
+                                        <section>
+                                             <pre><code data-noescape class="javascript">
+var cons = function(element, list) {
+    return [element].concat(list);
+}
+
+foldL(function(acc, x) { return cons(x, acc) }, [], [1,2,3]);
+// [3, 2, 1]
+
+foldR(function(x, acc) { return cons(x, acc) }, [], [1,2,3]);
+// [1, 2, 3]
                                             </code></pre>
                                         </section>
                                         <section>
@@ -551,17 +577,37 @@ reverse([1, 2, 3], []); // [3, 2, 1]</span>
                                                     <td>Right associative</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Backwards</td>
-                                                    <td>Forwards</td>
-                                                </tr>
-                                                <tr>
                                                     <td>Never works with infinite structures</td>
                                                     <td>Can potentially work with infinite structures</td>
-                                                </tr>                                         
+                                                </tr>    
+                                                <tr>
+                                                    <td></td>
+                                                    <td>Can be implemented with Fold Left for finite structures</td>
+                                                </tr>                                       
                                             </table>
                                         </section>  
                                         <section>
                                             <h2>Defining Map/Filter with Fold</h2>
+                                            <pre><code data-noescape class="javascript">var list = ['Map', 'Filter', 'Fold'];
+var cons = function(element, list) {
+    return [element].concat(list);
+}
+
+var map = function(func, list) {
+    return foldR(function(x, acc) { 
+        return cons(func(x), acc) 
+    }, [], list)
+}
+map(function(str) { return str.toUpperCase() }, list);
+// ['MAP', 'FILTER', 'FOLD']
+
+var filter = function(pred, list) {
+    return foldR(function(x, acc) { 
+        return pred(x) ? cons(x, acc) : acc 
+    }, [], list) 
+}
+filter(function(str) { return str.charAt(0) === 'M' }, list);
+// ['Map']</code></pre>
                                         </section>   
                                         <section>
                                             <h2>Language Support</h2>
