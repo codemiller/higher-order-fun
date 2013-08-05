@@ -113,6 +113,20 @@
 			    -o-animation-duration: 1.5s;
 			    animation-duration: 1.5s;
                         }
+                        .reveal .slides section .fragment.highlight-bg-red,
+                        .reveal .slides section .fragment.highlight-bg-green,
+                        .reveal .slides section .fragment.highlight-bg-blue {
+                            opacity: 1;
+                        }
+                        .reveal .slides section .fragment.highlight-bg-red.visible {
+                            background-color: #CC0000 !important;
+                        }
+                        .reveal .slides section .fragment.highlight-bg-green.visible {
+                            background-color: #009933 !important;
+                        }
+                        .reveal .slides section .fragment.highlight-bg-blue.visible {
+                            background-color: #3333FF !important;
+                        }
                 </style>
 	</head>
 
@@ -484,22 +498,46 @@ var filter = function(pred, list) {
                                 </section>
                                 <section>
                                         <section>
-                                            <h2>Fold</h2>
+                                            <h2>Fold/Reduce</h2>
                                             <img src="images/fold.png" width="500px" style="padding-top: 70px;"/>        
                                         </section>
                                         <section>
                                             <h2>Modus Operandi</h2>
                                             <ul>
-                                                <li>Also known as reduce, accumulate, aggregate, compress or inject</li>
+                                                <li>AKA accumulate, aggregate, compress or inject</li>
                                                 <li>Can be left associative or right associative</li>
+                                                <li>Encapsulates a recursive pattern</li>
+                                                <li>Reduces a recursive data structure to a single value, which could itself be a data structure</li>
+                                                <li>Applies binary function to each element and a return value, or accumulator, that is built up as the structure is processed</li>
+                                                <li>Accumulator can be given a starting value</li>
                                             </ul>   
                                         </section>   
                                         <section>
-                                            <h2>Fold Left vs Fold Right</h2> 
-                                        </section> 
+                                            <h2>Recursive Pattern</h2> 
+                                            <pre><code data-noescape class="javascript" id="highlighter">
+var sum = <span class="fragment highlight-bg-green" data-fragment-index="1" id="highlighted">function(list, startVal) {
+    if (list.length === 0) { return startVal }</span>
+    return <span class="fragment highlight-bg-red" data-fragment-index="4">sum</span>(<span class="fragment highlight-bg-blue" data-fragment-index="7">list.slice(1)</span>, list[0] + startVal); 
+}
+sum([1, 2, 3], 0); // 6
+
+var length = <span class="fragment highlight-bg-green" data-fragment-index="2">function(list, startVal) {
+    if (list.length === 0) { return startVal }</span>
+    return <span class="fragment highlight-bg-red" data-fragment-index="5">length</span>(<span class="fragment highlight-bg-blue" data-fragment-index="8">list.slice(1)</span>, 1 + startVal); 
+}
+length([1, 2, 3], 0); // 3
+
+var reverse = <span class="fragment highlight-bg-green" data-fragment-index="3">function(list, startVal) {
+    if (list.length === 0) { return startVal }</span>
+    return <span class="fragment highlight-bg-red" data-fragment-index="6">reverse</span>(<span class="fragment highlight-bg-blue" data-fragment-index="9">list.slice(1)</span>, [list[0]].concat(startVal)); 
+}
+reverse([1, 2, 3], []); // [3, 2, 1]
+
+</code></pre>                                               
+                                        </section>  
                                         <section>
-                                            <h2>Recursive Pattern</h2>  
-                                        </section>   
+                                            <h2>Fold Left vs Fold Right</h2> 
+                                        </section>  
                                         <section>
                                             <h2>Imperative vs Functional</h2> 
                                             <pre><code class="javascript">
