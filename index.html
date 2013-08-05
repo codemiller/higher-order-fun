@@ -507,6 +507,41 @@ var filter = function(pred, list) {
                                         </section>    
                                         <section>
                                             <h2>Language Support</h2>
+                                            <table style="font-size: 45%; border: 1px" width="100%">
+                                                <th>Language</th>
+                                                <th>Native Support</th>
+                                                <th>Left-Fold Syntax</th>
+                                                <th>Right-Fold Syntax</th>
+                                                <tr>
+                                                    <td class="bold">Clojure</td>
+                                                    <td class="yes-cell">Yes</td>
+                                                    <td>(reduce <em>func initval list</em>)</td>
+                                                    <td>(reduce <em>func initval </em> (reverse <em>list</em>))</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bold">JavaScript</td>
+                                                    <td class="yes-cell">1.8</td>
+                                                    <td><em>array</em>.reduce(<em>func</em>, <em>initval</em>)</td>
+                                                    <td><em>array</em>.reduceRight(<em>func</em>, <em>initval</em>)</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bold">Python</td>
+                                                    <td class="yes-cell">2.x yes; 3.x in <em>functools</em></td>
+                                                    <td>reduce(<em>func</em>, <em>list</em>, <em>initval</em>)</td>
+                                                    <td>reduce(lambda x,y: <em>func</em>(y,x), reversed(<em>list</em>), <em>initval</em>)</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="bold">Ruby</td>
+                                                    <td class="yes-cell">Yes</td>
+                                                    <td><em>enum</em>.reduce(<em>initval</em>, <em>&block</em>)</td>
+                                                    <td><em>enum</em>.reverse_each.reduce(<em>initval</em>, <em>&block</em>)</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="font-size: 18px;"><em>Ruby Notes:</em></td>
+                                                    <td colspan="3" style="font-size: 15px;"><em>In Ruby, reduce also called inject. In 1.8.7+ a symbol can be passed instead of a block. If the enumeration is an array, use reverse instead of reverse_each.</td>
+                                                </tr>
+                                            </table>
+                                            <p style="font-size: 45%; padding-top: 10px; float: left;">Source: <a href="http://en.wikipedia.org/wiki/Fold_(higher-order_function)#Folds_in_various_languages" target="_blank">Wikipedia</a></p>
                                         </section>
                                         <section>
                                             <h2>Defining Fold</h2>
