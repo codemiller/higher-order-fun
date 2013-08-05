@@ -412,7 +412,8 @@ var map = function(func, list) {
 var imperative = function(list, letter) {
     result = [];
     for(var i = 0; i < list.length; i++) {
-        if (list[i].charAt(0).toLowerCase() === letter) { 
+        if (list[i].charAt(0)
+                   .toLowerCase() === letter.toLowerCase()) { 
             result.push(list[i]) 
         }
     }
@@ -423,7 +424,7 @@ var functional = function(list, pred) {
 }
 var startsWith = function(l) { 
     return function(s) {
-        return s.charAt(0).toLowerCase() === l;
+        return s.charAt(0).toLowerCase() === l.toLowerCase();
     }
 }
 imperative(list, 'f');             // ['Filter', 'Fold']
