@@ -31,11 +31,13 @@
                 <style>
                     	.initial-front { z-index: 1; }
 			.initial-back { position: absolute; z-index: 2; }
-                        #functoappear.visible ~ #functohide { opacity: 0; visibility: hidden; }
+                        #functoappear.visible ~ #functohide, #series2.visible ~ #series1, #series3.visible ~ #series2, #series4.visible ~ #series3, #series5.visible ~ #series4,
+                        #series7.visible ~ #series6, #series8.visible ~ #series7, #series9.visible ~ #series8, #series10.visible ~ #series9 { opacity: 0; visibility: hidden; }
                         .yes-cell { background: #90ff90; }
                         .no-cell { background: #ff9090; }
                         .partial-cell { background: #ffb; }
                         .bold { font-weight: bold !important; }
+                        .bluebg { background-color: #3333FF !important; }
                         table { border-collapse: collapse !important; border: 1px solid #000 !important; }
                         table td { border: 1px solid #000 !important; text-align: center !important; }
                         table th { text-align: center !important; vertical-align: middle; !important;  } 
@@ -427,7 +429,7 @@ var imperative = function(list, letter) {
     result = [];
     for(var i = 0; i < list.length; i++) {
         if (list[i].charAt(0)
-                   .toLowerCase() === letter.toLowerCase()) { 
+                   .toLowerCase() === letter.toLowerCase()) {
             result.push(list[i]) 
         }
     }
@@ -562,10 +564,12 @@ var cons = function(element, list) {
 
 foldL(function(acc, x) { return cons(x, acc) }, [], [1,2,3]);
 // [3, 2, 1]
+<span class="fragment fade-in initial-back bluebg" data-fragment-index="5" id="series5">return func(func(func([], 1), 2), 3)</span><span class="fragment fade-in initial-back" data-fragment-index="4" id="series4">return [3,2,1]</span><span class="fragment fade-in initial-back" data-fragment-index="3" id="series3">return foldL(func, func([2,1], 3), [])</span><span class="fragment fade-in initial-back" data-fragment-index="2" id="series2">return foldL(func, func([1], 2), [3])</span><span class="fragment fade-in initial-front" data-fragment-index="1" id="series1">return foldL(func, func([], 1), [2,3])</span>
 
 foldR(function(x, acc) { return cons(x, acc) }, [], [1,2,3]);
-// [1, 2, 3]
-                                            </code></pre>
+// [1, 2, 3]  
+<span class="fragment fade-in initial-back bluebg" data-fragment-index="10" id="series10">return func(1, func(2, func(3, [])))</span><span class="fragment fade-in initial-back" data-fragment-index="9" id="series9">return []</span><span class="fragment fade-in initial-back" data-fragment-index="8" id="series8">return func(3, foldR(func, [], []))</span><span class="fragment fade-in initial-back" data-fragment-index="7" id="series7">return func(2, foldR(func, [], [3]))</span><span class="fragment fade-in initial-front" data-fragment-index="6" id="series6">return func(1, foldR(func, [], [2,3]))</span>
+                                </code></pre>
                                         </section>
                                         <section>
                                             <h2>Fold Left vs Fold Right</h2> 
