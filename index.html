@@ -516,9 +516,9 @@ var filter = function(pred, list) {
                                         <section>
                                             <h2>Recursive Pattern</h2> 
                                             <pre><code data-noescape class="javascript">
-var sum = <span class="fragment highlight-bg-green" data-fragment-index="3">function(list, initVal) {
+var sum = <span class="fragment highlight-bg-green highlighter3" data-fragment-index="3">function(list, initVal) {
     if (list.length === 0) { return initVal }</span>
-    return <span class="fragment highlight-bg-red" data-fragment-index="6">sum</span>(<span class="fragment highlight-bg-blue" data-fragment-index="9">list.slice(1)</span>, list[0] + initVal); 
+    return <span class="fragment highlight-bg-red highlighter3" data-fragment-index="6">sum</span>(<span class="fragment highlight-bg-blue highlighter3" data-fragment-index="9">list.slice(1)</span>, list[0] + initVal); 
 }
 sum([1, 2, 3], 0); // 6
 
@@ -665,7 +665,7 @@ filter(function(str) { return str.charAt(0) === 'M' }, list);
 
             <section>
                 <pre><code data-noescape class="java">void saveCat(final AnimalCallback&lt;Cat&gt; cb, final Cat cat) {
-    <span class="fragment highlight-bg-green" id="highlighter">try {
+    <span class="fragment highlight-bg-green highlighter5">try {
         cb.begin();</span>
         createRestClient(cb).updateCat(cat);
     <span class="fragment highlight-bg-green">} catch (final Exception ex) {
@@ -697,7 +697,7 @@ void saveDog(final AnimalCallback&lt;Dog&gt; cb, final Dog dog) {
 }
 
 &lt;T&gt; void doCall(AnimalCallback&lt;T&gt; cb, Caller restCaller) {
-    <span class="fragment highlight-bg-green" id="highlighter2">try {
+    <span class="fragment highlight-bg-green highlighter2">try {
         cb.begin();</span>
         restCaller.call();
     <span class="fragment highlight-bg-green">} catch (final Exception e) {
@@ -734,7 +734,7 @@ void getCow(final AnimalCallback&lt;Cow&gt; cb, final int id) {
 }
 
 void saveCat(AnimalCallback&lt;Cat&gt; cb, Cat cat) {
-    doCall(cb, <span class="fragment highlight-bg-blue" id="highlighter3">() -> createRestClient(cb).updateCat(cat)</span>);
+    doCall(cb, <span class="fragment highlight-bg-blue highlighter2">() -> createRestClient(cb).updateCat(cat)</span>);
 }
 
 void getCow(AnimalCallback&lt;Cow&gt; cb, int id) {
@@ -830,13 +830,16 @@ void getCow(AnimalCallback&lt;Cow&gt; cb, int id) {
                                     setTimeout(function() { Reveal.nextFragment(); }, 3000); 
                                 }, 1400);  
                             }
-                            if (event.fragment === document.getElementById('highlighter')) {
-                                for (var i = 0; i < 4; i++) {
-                                    Reveal.nextFragment();
+                            for (var num = 1; num <= 5; num++) {
+                                var nodeList = document.getElementsByClassName('highlighter' + num);
+                                for (var item = 0; item < nodeList.length; item++) {
+                                    if (nodeList[item] === event.fragment) {
+                                        for (var i = 1; i < num; i++) {
+                                            Reveal.nextFragment();
+                                        }
+                                    }
                                 }
                             }
-                            if (event.fragment === document.getElementById('highlighter2')) { Reveal.nextFragment(); }
-                            if (event.fragment === document.getElementById('highlighter3')) { Reveal.nextFragment(); }
                         });
 
 		</script>
