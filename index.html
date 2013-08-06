@@ -397,9 +397,13 @@ functional(list, function(str) { return str.charAt(0) });
                                         <section>
                                             <h2>Defining Map</h2>
                                             <pre><code class="javascript">
+var cons = function(element, list) {
+    return [element].concat(list);
+}
+
 var map = function(func, list) {
     if (list.length === 0) return [];
-    return [func(list[0])].concat(map(func, list.slice(1)));
+    return cons(func(list[0]), map(func, list.slice(1)));
 }
                                          </code></pre> 
 <p style="font-size: 45%; padding-left: 30px; text-align:left;">* Defined recursively for illustrative purposes. See Recursion chapter in <a href="http://shop.oreilly.com/product/0636920028857.do" target="_blank">Functional JavaScript</a> for information on limitations of recursion in JS, and workarounds.</p>
@@ -483,10 +487,14 @@ functional(list, startsWith('f')); // ['Filter', 'Fold']</code></pre>
                                         <section>
                                             <h2>Defining Filter</h2>
                                             <pre><code class="javascript">
+var cons = function(element, list) {
+    return [element].concat(list);
+}
+
 var filter = function(pred, list) {
     if (list.length === 0) return [];
     return pred(list[0]) 
-      ? [list[0]].concat(filter(pred, list.slice(1)))
+      ? cons(list[0], filter(pred, list.slice(1)))
       : filter(pred, list.slice(1));
 }
                                             </code></pre> 
@@ -507,12 +515,12 @@ var filter = function(pred, list) {
                                             <h2>Modus Operandi</h2>
                                             <ul>
                                                 <li>A family of functions</li>
-                                                <li>AKA accumulate, aggregate, compress or inject</li>
-                                                <li>Processes a recursive data structure and reduces it to a single value, which could itself be a data structure</li>
-                                                <li>Applies a combining function to each element of the structure and a return value, or accumulator, that is built up as the structure is processed</li>
-                                                <li>Accumulator can be given a starting value</li>
-                                                <li>Can be left associative or right associative</li>
-                                                <li>Can be strict or lazy</li>
+                                                <li class="fragment">AKA accumulate, aggregate, compress or inject</li>
+                                                <li class="fragment">Processes a recursive data structure and reduces it to a single value, which could itself be a data structure</li>
+                                                <li class="fragment">Applies a combining function to each element of the structure and a return value, or accumulator, that is built up as the structure is processed</li>
+                                                <li class="fragment">Accumulator can be given a starting value</li>
+                                                <li class="fragment">Can be left associative or right associative</li>
+                                                <li class="fragment">Can be strict or lazy</li>
                                             </ul>   
                                         </section>   
                                         <section>
@@ -745,7 +753,6 @@ void getCow(AnimalCallback&lt;Cow&gt; cb, int id) {
     String e = "{\"tail\":{\"type\": \""+ TAIL +"\"}}";
     doCall(cb, <span class="fragment highlight-bg-blue">() -> createRestClient(cb).getCow(id, e)</span>);
 }
-
 ...</code></pre>
                 <aside class="notes">
                 </aside>
