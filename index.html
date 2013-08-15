@@ -342,7 +342,7 @@ conceptually, one must provide new kinds of glue in the programming language. ..
                                         </section>   
                                         <section>
                                             <h2>Imperative vs Functional</h2> 
-                                            <pre><code class="javascript">var list = ['Map', 'Filter', 'Fold'];
+                                            <pre><code data-noescape class="javascript">var list = ['Map', 'Filter', 'Fold'];
 
 var imperative = function(list) {
     result = [];
@@ -352,14 +352,14 @@ var imperative = function(list) {
     return result;
 }
 
-var functional = function(list, func) {
+<span class="fragment">var functional = function(list, func) {
     return _.map(list, func);
-}
+}</span>
 
-imperative(list);
+<span class="fragment">imperative(list);
 // ['M', 'F', 'F']
 functional(list, function(str) { return str.charAt(0) });
-// ['M', 'F', 'F']                          </code></pre>  
+// ['M', 'F', 'F']</span>                          </code></pre>  
                                         </section>    
                                         <section>
                                             <h2>Language Support</h2>
@@ -429,7 +429,7 @@ var map = function(func, list) {
                                         </section>   
                                         <section>
                                             <h2>Imperative vs Functional</h2> 
-                                            <pre><code class="javascript">var list = ['Map', 'Filter', 'Fold'];
+                                            <pre><code data-noescape class="javascript">var list = ['Map', 'Filter', 'Fold'];
 var imperative = function(list, letter) {
     result = [];
     for(var i = 0; i < list.length; i++) {
@@ -440,16 +440,16 @@ var imperative = function(list, letter) {
     }
     return result;
 }
-var functional = function(list, pred) {
+<span class="fragment">var functional = function(list, pred) {
     return _.filter(list, pred);
-}
-var startsWith = function(l) { 
+}</span>
+<span class="fragment">var startsWith = function(l) { 
     return function(s) {
         return s.charAt(0).toLowerCase() === l.toLowerCase();
     }
-}
+}</span><span class="fragment">
 imperative(list, 'f');             // ['Filter', 'Fold']
-functional(list, startsWith('f')); // ['Filter', 'Fold']</code></pre>  
+functional(list, startsWith('f')); // ['Filter', 'Fold']</span></code></pre>  
                                         </section>    
                                         <section>
                                             <h2>Language Support</h2>
@@ -525,6 +525,19 @@ var filter = function(pred, list) {
                                             </ul>   
                                         </section>   
                                         <section>
+                                            <h2>Imperative Approach</h2> 
+                                            <pre><code data-noescape class="javascript">
+var sum = function(list, initVal) {
+    for (var i = 0; i < list.length; i++) {
+        initVal += list[i];
+    }
+    return initVal;
+};
+sum([1, 2, 3], 0); // 6
+
+</code></pre>                                               
+                                        </section>  
+                                        <section>
                                             <h2>Recursive Pattern</h2> 
                                             <pre><code data-noescape class="javascript">
 var sum = <span class="fragment highlight-bg-green highlighter3" data-fragment-index="3">function(list, initVal) {
@@ -557,12 +570,12 @@ var foldL = function(func, initVal, list) {
 foldL(function(acc, x) { return acc + x }, 0, [1,2,3]);
 // 6
 
-var foldR = function(func, initVal, list) {
+<span class="fragment">var foldR = function(func, initVal, list) {
     if (list.length === 0) { return initVal }
     return func(list[0], foldR(func, initVal, list.slice(1)))
 }
 foldR(function(x, acc) { return x + acc }, 0, [1,2,3]);
-// 6
+// 6</span>
                                             </code></pre>
                                         </section>
                                         <section>
@@ -606,21 +619,21 @@ var cons = function(element, list) {
     return [element].concat(list);
 }
 
-var map = function(func, list) {
+<span class="fragment">var map = function(func, list) {
     return foldR(function(x, acc) { 
         return cons(func(x), acc) 
     }, [], list)
 }
 map(function(str) { return str.toUpperCase() }, list);
-// ['MAP', 'FILTER', 'FOLD']
+// ['MAP', 'FILTER', 'FOLD']</span>
 
-var filter = function(pred, list) {
+<span class="fragment">var filter = function(pred, list) {
     return foldR(function(x, acc) { 
         return pred(x) ? cons(x, acc) : acc 
     }, [], list) 
 }
 filter(function(str) { return str.charAt(0) === 'M' }, list);
-// ['Map']</code></pre>
+// ['Map']</span></code></pre>
                                         </section>   
                                         <section>
                                             <h2>Language Support</h2>
