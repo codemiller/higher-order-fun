@@ -38,6 +38,7 @@
                         .partial-cell { background: #ffb; }
                         .bold { font-weight: bold !important; }
                         .bluebg { background-color: #3333FF !important; }
+                        .greenbg { background-color: #009933 !important; }
                         table { border-collapse: collapse !important; border: 1px solid #000 !important; }
                         table td { border: 1px solid #000 !important; text-align: center !important; }
                         table th { text-align: center !important; vertical-align: middle; !important;  } 
@@ -168,21 +169,21 @@ var add = function(arg1, arg2) {
     return arg1 + arg2;
 }
 
-<span class="fragment initial-back" data-fragment-index="2" id="functoappear">    3     + " Musketeers";
+<span class="fragment initial-back" data-fragment-index="5" id="functoappear"><span class="greenbg">    3    </span> + " Musketeers";
 // "3 Musketeers"
 
-    3     + " Little Pigs";
+<span class="greenbg">    3    </span> + " Little Pigs";
 // "3 Little Pigs"
 
-    3     + " Amigos";
+<span class="greenbg">    3    </span> + " Amigos";
 // "3 Amigos"
-</span><span class="fragment fade-in initial-front" data-fragment-index="1" id="functohide">add(1, 2) + " Musketeers";
+</span><span class="fragment fade-in initial-front" data-fragment-index="1" id="functohide"><span class="fragment highlight-bg-green highlighter3" data-fragment-index="2">add(1, 2)</span> + " Musketeers";
 // "3 Musketeers"
 
-add(1, 2) + " Little Pigs";
+<span class="fragment highlight-bg-green" data-fragment-index="3">add(1, 2)</span> + " Little Pigs";
 // "3 Little Pigs"
 
-add(1, 2) + " Amigos";
+<span class="fragment highlight-bg-green" data-fragment-index="4">add(1, 2)</span> + " Amigos";
 // "3 Amigos"</span>
                                                </code></pre>
                                         </section>
@@ -219,22 +220,22 @@ var impureAdd = function(arg1, arg2) {
                                         </section>     
                                         <section>
                                             <h2>Closures</h2>
-                                            <pre><code class="javascript">
+                                            <pre><code data-noescape class="javascript">
 function startsWith(name) {
     var firstLetter = name.charAt(0);
-    return function() { 
+    <span class="fragment highlight-bg-green">return function() { 
         return "Name starts with " + firstLetter; 
-    };
+    };</span>
 }
 
 var myName = startsWith("Katie");
 var languageName = startsWith("JavaScript");
 
-myName();
+<span class="fragment">myName();
 // "Name starts with K"
 
 languageName();
-// "Name starts with J"
+// "Name starts with J"</span>
                                             </code></pre>
                                         </section>  
                                         <section>
@@ -669,95 +670,8 @@ filter(function(str) { return str.charAt(0) === 'M' }, list);
                                         <section>
                                             <h2>Choose Your Own Adventure</h2> 
                                             <img src="images/adventure.jpg" width="1000px"/>        
-                                        </section> 
-                                        <section> 
-                                            <h2>Real World Example</h2>
-                                            <img src="images/earth.svg" style="width: 400px;"/> 
-                                        </section>
-
-            <section>
-                <pre><code data-noescape class="java">void saveCat(final AnimalCallback&lt;Cat&gt; cb, final Cat cat) {
-    <span class="fragment highlight-bg-green highlighter5">try {
-        cb.begin();</span>
-        createRestClient(cb).updateCat(cat);
-    <span class="fragment highlight-bg-green">} catch (final Exception ex) {
-        cb.generalException(ex);
-    }</span>
-}
-
-void getCow(final AnimalCallback&lt;Cow&gt; cb, final int id) {
-    final String e = "{\"tail\":{\"type\": \""+ TAIL +"\"}}";
-    <span class="fragment highlight-bg-green">try {
-        cb.begin();</span>
-        createRestClient(cb).getCow(id, e);
-    <span class="fragment highlight-bg-green">} catch (final Exception ex) {
-        cb.generalException(ex);
-    }</span>
-}
-
-void saveDog(final AnimalCallback&lt;Dog&gt; cb, final Dog dog) {
-    <span class="fragment highlight-bg-green">try {
-        cb.begin();</span>
-        createRestClient(cb).updateDog(dog, BARK);
-    ...</code></pre>
-                <aside class="notes">
-                </aside>
-            </section>
-            <section>
-                <pre><code data-noescape class="java">interface Caller {
-    public void call() throws Exception;
-}
-
-&lt;T&gt; void doCall(AnimalCallback&lt;T&gt; cb, Caller restCaller) {
-    <span class="fragment highlight-bg-green highlighter2">try {
-        cb.begin();</span>
-        restCaller.call();
-    <span class="fragment highlight-bg-green">} catch (final Exception e) {
-        cb.generalException(e);
-    }</span>
-}
-
-void saveCat(final AnimalCallback&lt;Cat&gt; cb, final Cat cat) {
-    doCall(cb, new Caller() {
-        @Override
-        public void call() throws Exception {
-            <span class="fragment highlight-bg-blue">createRestClient(cb).updateCat(cat);</span>
-        }
-    });
-}
-
-void getCow(final AnimalCallback&lt;Cow&gt; cb, final int id) {
-    ...</code></pre>
-                <aside class="notes">
-                </aside>
-            </section>
-            <section>
-                <pre><code data-noescape class="java">interface Caller {
-    public void call() throws Exception;
-}
-
-&lt;T&gt; void doCall(AnimalCallback&lt;T&gt; cb, Caller restCaller) {
-    try {
-        cb.begin();
-        restCaller.call();
-    } catch (final Exception e) {
-        cb.generalException(e);
-    }
-}
-
-void saveCat(AnimalCallback&lt;Cat&gt; cb, Cat cat) {
-    doCall(cb, <span class="fragment highlight-bg-blue highlighter2">() -> createRestClient(cb).updateCat(cat)</span>);
-}
-
-void getCow(AnimalCallback&lt;Cow&gt; cb, int id) {
-    String e = "{\"tail\":{\"type\": \""+ TAIL +"\"}}";
-    doCall(cb, <span class="fragment highlight-bg-blue">() -> createRestClient(cb).getCow(id, e)</span>);
-}
-...</code></pre>
-                <aside class="notes">
-                </aside>
-            </section>
-                                </section>
+                                        </section>       
+                                </section>                                
                                 <section>
                                         <section>
                                             <h2>Gluing It All Together</h2> 
