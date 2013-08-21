@@ -397,17 +397,19 @@ functional(list, function(str) { return str.charAt(0) });
                                         </section>
                                         <section>
                                             <h2>Defining Map</h2>
-                                            <pre><code class="javascript">
+                                            <pre><code data-noescape class="javascript">
 var cons = function(element, list) {
     return [element].concat(list);
 }
 
-var map = function(func, list) {
+<span class="fragment">var consList = cons(1, cons(2, cons(3, [])))
+// [1, 2, 3]
+</span>
+<span class="fragment">var map = function(func, list) {
     if (list.length === 0) return [];
     return cons(func(list[0]), map(func, list.slice(1)));
-}
+}</span>
                                          </code></pre> 
-<p style="font-size: 45%; padding-left: 30px; text-align:left;">* Defined recursively for illustrative purposes. See Recursion chapter in <a href="http://shop.oreilly.com/product/0636920028857.do" target="_blank">Functional JavaScript</a> for information on limitations of recursion in JS, and workarounds.</p>
                                         </section>
                                         <section>
                                             <h2>Visualising Map</h2>
@@ -499,7 +501,6 @@ var filter = function(pred, list) {
       : filter(pred, list.slice(1));
 }
                                             </code></pre> 
-<p style="font-size: 45%; padding-left: 30px; text-align:left;">* Defined recursively for illustrative purposes. See Recursion chapter in <a href="http://shop.oreilly.com/product/0636920028857.do" target="_blank">Functional JavaScript</a> for information on limitations of recursion in JS, and workarounds.</p>
                                         </section>
                                         <section>
                                             <h2>Visualising Filter</h2>
@@ -527,12 +528,14 @@ var filter = function(pred, list) {
                                         <section>
                                             <h2>Imperative Approach</h2> 
                                             <pre><code data-noescape class="javascript">
-var sum = function(list, initVal) {
+var sum = function(list) {
+    var initVal = 0;
     for (var i = 0; i < list.length; i++) {
         initVal += list[i];
     }
     return initVal;
 };
+
 sum([1, 2, 3], 0); // 6
 
 </code></pre>                                               
@@ -620,16 +623,16 @@ var cons = function(element, list) {
 }
 
 <span class="fragment">var map = function(func, list) {
-    return foldR(function(x, acc) { 
-        return cons(func(x), acc) 
+    return foldL(function(acc, x) { 
+        <span class="fragment highlight-bg-green">return cons(func(x), acc)</span> 
     }, [], list)
 }
 map(function(str) { return str.toUpperCase() }, list);
 // ['MAP', 'FILTER', 'FOLD']</span>
 
 <span class="fragment">var filter = function(pred, list) {
-    return foldR(function(x, acc) { 
-        return pred(x) ? cons(x, acc) : acc 
+    return foldL(function(acc, x) { 
+        <span class="fragment highlight-bg-green">return pred(x) ? cons(x, acc) : acc</span> 
     }, [], list) 
 }
 filter(function(str) { return str.charAt(0) === 'M' }, list);
