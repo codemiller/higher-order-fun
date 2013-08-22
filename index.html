@@ -636,7 +636,7 @@ var cons = function(element, list) {
 }
 
 <span class="fragment">var map = function(func, list) {
-    return foldL(function(acc, x) { 
+    return foldR(function(x, acc) { 
         <span class="fragment highlight-bg-green">return cons(func(x), acc)</span> 
     }, [], list)
 }
@@ -644,7 +644,7 @@ map(function(str) { return str.toUpperCase() }, list);
 // ['MAP', 'FILTER', 'FOLD']</span>
 
 <span class="fragment">var filter = function(pred, list) {
-    return foldL(function(acc, x) { 
+    return foldR(function(x, acc) { 
         <span class="fragment highlight-bg-green">return pred(x) ? cons(x, acc) : acc</span> 
     }, [], list) 
 }
