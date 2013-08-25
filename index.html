@@ -32,7 +32,8 @@
                     	.initial-front { z-index: 1; }
 			.initial-back { position: absolute; z-index: 2; }
                         #functoappear.visible ~ #functohide, #series2.visible ~ #series1, #series3.visible ~ #series2, #series4.visible ~ #series3, #series5.visible ~ #series4,
-                        #series7.visible ~ #series6, #series8.visible ~ #series7, #series9.visible ~ #series8, #series10.visible ~ #series9 { opacity: 0; visibility: hidden; }
+                        #series7.visible ~ #series6, #series8.visible ~ #series7, #series9.visible ~ #series8, #series10.visible ~ #series9, #funcseries2.visible ~ #funcseries1, 
+                        #funcseries3.visible ~ #funcseries2, #funcseries4.visible ~ #funcseries3, #funcseries5.visible ~ #funcseries4 { opacity: 0; visibility: hidden; }
                         .yes-cell { background: #90ff90; }
                         .no-cell { background: #ff9090; }
                         .partial-cell { background: #ffb; }
@@ -273,10 +274,11 @@ conceptually, one must provide new kinds of glue in the programming language. ..
                                         <section>
                                             <h2>Building Functions</h2>
                                             <ul>
-                                                <li class="fragment">Function composition: <code>h(x) = f(g(x))</code></li>
-                                                <li class="fragment">Partial application: <code>f(1,2) //g(x,y,z)</code></li>
-                                                <li class="fragment">Currying: <code>f(1) //g(x)</code></li>
-                                            </ul>                                        
+                                                <li>Function composition</li>
+                                                <li class="fragment" data-fragment-index="3">Partial application</li>
+                                                <li class="fragment" data-fragment-index="4">Currying</li>
+                                            </ul>     
+                                            <div><div class="fragment initial-back" id="funcseries5" data-fragment-index="5" style="left: 180px; top: 310px;"><img src="images/func-curried.png" style="width: 700px" /></div><div class="fragment initial-back" id="funcseries4" data-fragment-index="4" style="left: 300px; top: 310px;"><img src="images/func-multiparam.png" style="width: 420px" /></div><div class="fragment initial-back" id="funcseries3" data-fragment-index="3" style="left: 300px; top: 280px;"><img src="images/func-partial.png" style="width: 500px" /></div><div class="fragment initial-back" id="funcseries2" data-fragment-index="2" style="left: 300px; top: 250px;"><img src="images/func-composed.png" style="width: 420px" /></div><div class="fragment initial-front" id="funcseries1" data-fragment-index="1"><img src="images/func-f.png" /><img src="images/func-g.png" style="padding-left: 30px;" /></div></div>                                   
                                         </section>                                       
                                         <section>
                                             <h2>Language Support</h2>
