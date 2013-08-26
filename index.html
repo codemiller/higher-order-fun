@@ -353,7 +353,7 @@ conceptually, one must provide new kinds of glue in the programming language. ..
 var imperative = function(list) {
     result = [];
     for(var i = 0; i < list.length; i++) {
-        result.push(list[i].charAt(0));
+        result.push(list[i].toUpperCase());
     }
     return result;
 }
@@ -363,9 +363,9 @@ var imperative = function(list) {
 }</span>
 
 <span class="fragment">imperative(list);
-// ['M', 'F', 'F']
-functional(list, function(str) { return str.charAt(0) });
-// ['M', 'F', 'F']</span>                          </code></pre>  
+// ['MAP', 'FILTER', 'FOLD']
+functional(list, function(str) { return str.toUpperCase() });
+// ['MAP', 'FILTER', 'FOLD']</span>                          </code></pre>  
                                         </section>    
                                         <section>
                                             <h2>Language Support</h2>
@@ -441,23 +441,22 @@ var cons = function(element, list) {
 var imperative = function(list, letter) {
     result = [];
     for(var i = 0; i < list.length; i++) {
-        if (list[i].charAt(0)
-                   .toLowerCase() === letter.toLowerCase()) {
+        if (list[i].charAt(0) === letter) {
             result.push(list[i]) 
         }
     }
     return result;
 }
+
 <span class="fragment">var functional = function(list, pred) {
     return _.filter(list, pred);
 }</span>
 <span class="fragment">var startsWith = function(l) { 
-    return function(s) {
-        return s.charAt(0).toLowerCase() === l.toLowerCase();
-    }
-}</span><span class="fragment">
-imperative(list, 'f');             // ['Filter', 'Fold']
-functional(list, startsWith('f')); // ['Filter', 'Fold']</span></code></pre>  
+    return function(s) { return s.charAt(0) === l }
+}
+</span><span class="fragment">
+imperative(list, 'F');             // ['Filter', 'Fold']
+functional(list, startsWith('F')); // ['Filter', 'Fold']</span></code></pre>  
                                         </section>    
                                         <section>
                                             <h2>Language Support</h2>
