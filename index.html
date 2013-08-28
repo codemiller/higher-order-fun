@@ -581,7 +581,7 @@ foldL(<span class="fragment highlight-bg-purple" data-fragment-index="6">functio
 
 <span class="fragment" data-fragment-index="1">var foldR = <span class="fragment highlight-bg-green" data-fragment-index="2">function(func, initVal, list) {
     if (list.length === 0) { return initVal }</span>
-    return <span class="fragment highlight-bg-purple" data-fragment-index="5">func</span>(list[0], <span class="fragment highlight-bg-red" data-fragment-index="3">foldR</span>(func, initVal, <span class="fragment highlight-bg-blue" data-fragment-index="4">list.slice(1)</span>))
+    return <span class="fragment highlight-bg-purple" data-fragment-index="5">func(list[0], <span class="fragment highlight-bg-red" data-fragment-index="3">foldR</span>(func, initVal, <span class="fragment highlight-bg-blue" data-fragment-index="4">list.slice(1)</span>))</span>
 }
 foldR(<span class="fragment highlight-bg-purple" data-fragment-index="6">function(x, acc)</span> { return x + acc }, 0, [1,2,3]);
 // 6
