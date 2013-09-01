@@ -193,24 +193,24 @@ var add = function(arg1, arg2) {
                                                </code></pre>
                                         </section>
                                         <section>
-                                                <pre><code data-noescape class="javascript"><span class="fragment fade-out" id="blackout" data-fragment-index="5">
+                                                <pre><code data-noescape class="javascript"><span class="fragment fade-out" id="blackout" data-fragment-index="7">
 var impureAdd = function(arg1, arg2) {
-    assessSituation();
-    if (warDeclared) {
-        console.log("Impending doom...");
-        launchMissile();
+    <span class="fragment highlight-bg-red" data-fragment-index="1">assessSituation();</span>
+    <span class="fragment highlight-bg-red" data-fragment-index="1">if (warDeclared)</span> {
+        <span class="fragment highlight-bg-red" data-fragment-index="2">console.log("Impending doom...");</span>
+        <span class="fragment highlight-bg-red" data-fragment-index="2">launchMissile();</span>
     }
     return arg1 + arg2;
 }
 
-<span class="fragment" data-fragment-index="1">impureAdd(1, 2) + " Musketeers";
+<span class="fragment" data-fragment-index="3">impureAdd(1, 2) + " Musketeers";
 // "3 Musketeers"</span>
 
-<span class="fragment" data-fragment-index="2" id="doom">impureAdd(1, 2) + " Little Pigs";
+<span class="fragment" data-fragment-index="4" id="doom">impureAdd(1, 2) + " Little Pigs";
 // "Impending doom..."</span>
                                                </code></pre>
-                                               <span class="fragment flyin-fromleft" style="position: absolute; top: 180px; left: 100px; z-index: 2; width: 400px;" id="missile" data-fragment-index="3"><img src="images/missile.png"/></span>
-                                               <span class="fragment explosion" id="explosion" style="position: absolute; top: 400px; left: 440px; z-index: 2;" data-fragment-index="4"><img src="images/explosion.gif"/></span></span>
+                                               <span class="fragment flyin-fromleft" style="position: absolute; top: 180px; left: 100px; z-index: 2; width: 400px;" id="missile" data-fragment-index="5"><img src="images/missile.png"/></span>
+                                               <span class="fragment explosion" id="explosion" style="position: absolute; top: 400px; left: 440px; z-index: 2;" data-fragment-index="6"><img src="images/explosion.gif"/></span></span>
                                         </section>  
                                         <section>
                                             <h2>Spot the Bug</h2>
