@@ -39,10 +39,13 @@
                         .partial-cell { background: #ffb; }
                         .bold { font-weight: bold !important; }
                         .bluebg { background-color: #3333FF !important; }
-                        .greenbg { background-color: #009933 !important; }
-                        table { border-collapse: collapse !important; border: 1px solid #000 !important; }
-                        table td { border: 1px solid #000 !important; text-align: center !important; }
-                        table th { text-align: center !important; vertical-align: middle; !important;  } 
+                        .greenbg { background-color: #009933 !important; }   
+                        table.centreTable { border-collapse: collapse !important; border: 1px solid #000 !important; font-size: 45%; border: 1px; width: 100%; }
+                        table.centreTable td { border: 1px solid #000 !important; text-align: center !important; }
+                        table.centreTable th { text-align: center !important; vertical-align: middle; !important;  } 
+                        table.leftTable { border-collapse: collapse !important; border: 1px solid #000 !important; font-size: 60%; border: 1px; line-height: 1.5em; width: 100%; }
+                        table.leftTable td { border: 1px solid #000 !important; text-align: left !important; padding: 5px; }
+                        table.leftTable th { text-align: center !important; vertical-align: middle; !important; font-weight: bold; }                        
 
                         @-webkit-keyframes explode { 
 			   0% { opacity: 1; }
@@ -226,7 +229,7 @@ var impureAdd = function(arg1, arg2) {
                                         <section>
                                             <h2>Closures</h2>
                                             <pre><code data-noescape class="javascript">
-function startsWith(name) {
+var startsWith = function(name) {
     var firstLetter = name.charAt(0);
     <span class="fragment highlight-bg-green">return function() { 
         return "Name starts with " + firstLetter; 
@@ -282,7 +285,7 @@ conceptually, one must provide new kinds of glue in the programming language. ..
                                         </section>                                       
                                         <section>
                                             <h2>Language Support</h2>
-                                            <table style="font-size: 45%; border: 1px" width="100%">
+                                            <table class="centreTable">
                                                 <th>Language</th>
                                                 <th>Anonymous Functions</th>
                                                 <th>Closures</th>
@@ -369,7 +372,7 @@ functional(list, function(str) { return str.toUpperCase() });
                                         </section>    
                                         <section>
                                             <h2>Language Support</h2>
-                                            <table style="font-size: 45%; border: 1px" width="100%">
+                                            <table class="centreTable">
                                                 <th>Language</th>
                                                 <th>Native Support</th>
                                                 <th>Syntax</th>
@@ -460,7 +463,7 @@ functional(list, startsWith('F')); // ['Filter', 'Fold']</span></code></pre>
                                         </section>    
                                         <section>
                                             <h2>Language Support</h2>
-                                                <table style="font-size: 45%; border: 1px" width="100%">
+                                                <table class="centreTable">
                                                 <th>Language</th>
                                                 <th>Native Support</th>
                                                 <th>Syntax</th>
@@ -608,9 +611,9 @@ foldR(function(x, acc) { return cons(x, acc) }, [], [1,2,3]);
                                         </section>
                                         <section>
                                             <h2>Fold Left vs Fold Right</h2> 
-                                            <table style="font-size: 45%; border: 1px" width="100%">
-                                                <th class="bold">Fold Left</th>
-                                                <th class="bold">Fold Right</th>
+                                            <table class="leftTable">
+                                                <th>Fold Left</th>
+                                                <th>Fold Right</th>
                                                 <tr>
                                                     <td>Left associative</td>
                                                     <td>Right associative</td>
@@ -624,7 +627,7 @@ foldR(function(x, acc) { return cons(x, acc) }, [], [1,2,3]);
                                                     <td>Can potentially work with infinite structures</td>
                                                 </tr>    
                                                 <tr>
-                                                    <td></td>
+                                                    <td>Strict version useful for processing large lists when tail-call optimised</td>
                                                     <td>Can be implemented with Fold Left for finite structures</td>
                                                 </tr>                                       
                                             </table>
@@ -654,7 +657,7 @@ filter(function(str) { return str.charAt(0) === 'M' }, list);
                                         </section>   
                                         <section>
                                             <h2>Language Support</h2>
-                                            <table style="font-size: 45%; border: 1px" width="100%">
+                                            <table class="centreTable">
                                                 <th>Language</th>
                                                 <th>Native Support</th>
                                                 <th>Fold Left Syntax</th>
