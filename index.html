@@ -405,22 +405,6 @@ functional(list, function(str) { return str.toUpperCase() });
                                             <p style="font-size: 45%; padding-top: 10px; float: left;">Source: <a href="http://en.wikipedia.org/wiki/Map_(higher-order_function)#Language_comparison" target="_blank">Wikipedia</a></p>
                                         </section>
                                         <section>
-                                            <h2>Defining Map</h2>
-                                            <pre><code data-noescape class="javascript">
-var cons = function(element, list) {
-    return [element].concat(list);
-}
-
-<span class="fragment">var consList = cons(1, cons(2, cons(3, [])))
-// [1, 2, 3]
-</span>
-<span class="fragment">var map = function(func, list) {
-    if (list.length === 0) return [];
-    return cons(func(list[0]), map(func, list.slice(1)));
-}</span>
-                                         </code></pre> 
-                                        </section>
-                                        <section>
                                             <h2>Visualising Map</h2>
                                             <img src="images/hand.png" width="500px" style="padding-top: 20px; padding-bottom: 20px;"/>
                                             <p><a href="http://tributary.io/inlet/6026457" target="_blank">http://tributary.io/inlet/6026457</a></p>      
@@ -496,21 +480,6 @@ functional(list, startsWith('F')); // ['Filter', 'Fold']</span></code></pre>
                                             <p style="font-size: 45%; padding-top: 10px; float: left;">Source: <a href="http://en.wikipedia.org/wiki/Filter_(higher-order_function)#Implementation" target="_blank">Wikipedia</a></p>
                                         </section>
                                         <section>
-                                            <h2>Defining Filter</h2>
-                                            <pre><code class="javascript">
-var cons = function(element, list) {
-    return [element].concat(list);
-}
-
-var filter = function(pred, list) {
-    if (list.length === 0) return [];
-    return pred(list[0]) 
-      ? cons(list[0], filter(pred, list.slice(1)))
-      : filter(pred, list.slice(1));
-}
-                                            </code></pre> 
-                                        </section>
-                                        <section>
                                             <h2>Visualising Filter</h2>
                                             <img src="images/hand.png" width="500px" style="padding-top: 20px; padding-bottom: 20px;"/>
                                             <p><a href="http://tributary.io/inlet/6026457" target="_blank">http://tributary.io/inlet/6026457</a></p>      
@@ -574,22 +543,25 @@ reverse([1, 2, 3], []); // [3, 2, 1]</span>
                                         <section>
                                             <h2>Defining Fold</h2>
                                             <pre><code data-noescape class="javascript">
-var foldL = <span class="fragment highlight-bg-green" data-fragment-index="2">function(func, initVal, list) {
+var foldL = <span class="fragment highlight-bg-green" data-fragment-index="1">function(func, initVal, list) {
     if (list.length === 0) { return initVal }</span>
-    return <span class="fragment highlight-bg-red" data-fragment-index="3">foldL</span>(func, <span class="fragment highlight-bg-purple" data-fragment-index="5">func(initVal, list[0])</span>, <span class="fragment highlight-bg-blue" data-fragment-index="4">list.slice(1)</span>)
+    return <span class="fragment highlight-bg-red" data-fragment-index="2">foldL</span>(func, <span class="fragment highlight-bg-purple" data-fragment-index="4">func(initVal, list[0])</span>, <span class="fragment highlight-bg-blue" data-fragment-index="3">list.slice(1)</span>);
 }
-foldL(<span class="fragment highlight-bg-purple" data-fragment-index="6">function(acc, x)</span> { return acc + x }, 0, [1,2,3]);
-// 6
-// (((0 + 1) + 2) + 3)
+var sum = function(list) { 
+    foldL(<span class="fragment highlight-bg-purple" data-fragment-index="10">function(acc, x)</span> { return acc + x }, 0, list);
+}
+sum([1,2,3]);
+// 6 = (((0 + 1) + 2) + 3)
 
-<span class="fragment" data-fragment-index="1">var foldR = <span class="fragment highlight-bg-green" data-fragment-index="2">function(func, initVal, list) {
+<span class="fragment" data-fragment-index="5">var foldR = <span class="fragment highlight-bg-green" data-fragment-index="6">function(func, initVal, list) {
     if (list.length === 0) { return initVal }</span>
-    return <span class="fragment highlight-bg-purple" data-fragment-index="5">func(list[0], <span class="fragment highlight-bg-red" data-fragment-index="3">foldR</span>(func, initVal, <span class="fragment highlight-bg-blue" data-fragment-index="4">list.slice(1)</span>))</span>
+    return <span class="fragment highlight-bg-purple" data-fragment-index="9">func(list[0], <span class="fragment highlight-bg-red" data-fragment-index="8">foldR</span>(func, initVal, <span class="fragment highlight-bg-blue" data-fragment-index="7">list.slice(1)</span>));</span>
 }
-foldR(<span class="fragment highlight-bg-purple" data-fragment-index="6">function(x, acc)</span> { return x + acc }, 0, [1,2,3]);
-// 6
-// (1 + (2 + (3 + 0)))</span>
-                                            </code></pre>
+var sum2 = function(list) {
+    foldR(<span class="fragment highlight-bg-purple" data-fragment-index="10">function(x, acc)</span> { return x + acc }, 0, list);
+}
+sum2([1,2,3]);
+// 6 = (1 + (2 + (3 + 0)))</span></code></pre>
                                         </section> 
                                         <section>
                                              <pre><code data-noescape class="javascript">
@@ -599,14 +571,14 @@ var cons = function(element, list) {
 
 foldL(function(acc, x) { return cons(x, acc) }, [], [1,2,3]);
 // [3, 2, 1]
-<span class="fragment fade-in initial-back" data-fragment-index="10" id="series4">return <span class="greenbg">[3, 2, 1]</span></span><span class="fragment fade-in initial-back" data-fragment-index="8" id="series3">return <span class="fragment highlight-bg-green" data-fragment-index="9">func(<span class="greenbg">[2, 1]</span>, 3)</span></span><span class="fragment fade-in initial-back" data-fragment-index="6" id="series2">return func(<span class="fragment highlight-bg-green" data-fragment-index="7">func(<span class="greenbg">[1]</span>, 2)</span>, 3)</span><span class="fragment fade-in initial-front" data-fragment-index="3" id="series1">return func(func(<span class="fragment highlight-bg-green" data-fragment-index="4">func([], 1)</span>, 2), 3)</span>
-<span class="fragment bluebg" data-fragment-index="1">return func(func(func([], 1), 2), 3)</span>
+<span class="fragment fade-in initial-back" data-fragment-index="10" id="series4">return <span class="greenbg">[3, 2, 1]</span>;</span><span class="fragment fade-in initial-back" data-fragment-index="8" id="series3">return <span class="fragment highlight-bg-green" data-fragment-index="9">func(<span class="greenbg">[2, 1]</span>, 3)</span>;</span><span class="fragment fade-in initial-back" data-fragment-index="6" id="series2">return func(<span class="fragment highlight-bg-green" data-fragment-index="7">func(<span class="greenbg">[1]</span>, 2)</span>, 3);</span><span class="fragment fade-in initial-front" data-fragment-index="3" id="series1">return func(func(<span class="fragment highlight-bg-green" data-fragment-index="4">func([], 1)</span>, 2), 3);</span>
+<span class="fragment bluebg" data-fragment-index="1">return func(func(func([], 1), 2), 3);</span>
 
 foldR(function(x, acc) { return cons(x, acc) }, [], [1,2,3]);
 // [1, 2, 3]  
-<span class="fragment fade-in initial-back" data-fragment-index="18" id="series9">return <span class="greenbg">[1, 2, 3]</span></span><span class="fragment fade-in initial-back" data-fragment-index="16" id="series8">return <span class="fragment highlight-bg-green" data-fragment-index="17">func(1, <span class="greenbg">[2, 3]</span>)</span></span><span class="fragment fade-in initial-back" data-fragment-index="14" id="series7">return func(1, <span class="fragment highlight-bg-green" data-fragment-index="15">func(2, <span class="greenbg">[3]</span>)</span>)</span><span class="fragment fade-in initial-front" data-fragment-index="12" id="series6">return func(1, func(2, <span class="fragment highlight-bg-green" data-fragment-index="13">func(3, [])</span>))</span>
-<span class="fragment bluebg" data-fragment-index="2">return func(1, func(2, func(3, [])))</span>
-<span class="fragment" data-fragment-index="11">return cons(1, cons(2, cons(3, [])))</span>
+<span class="fragment fade-in initial-back" data-fragment-index="17" id="series9">return <span class="greenbg">[1, 2, 3]</span>;</span><span class="fragment fade-in initial-back" data-fragment-index="15" id="series8">return <span class="fragment highlight-bg-green" data-fragment-index="16">func(1, <span class="greenbg">[2, 3]</span>)</span>;</span><span class="fragment fade-in initial-back" data-fragment-index="13" id="series7">return func(1, <span class="fragment highlight-bg-green" data-fragment-index="14">func(2, <span class="greenbg">[3]</span>)</span>);</span><span class="fragment fade-in initial-front" data-fragment-index="11" id="series6">return func(1, func(2, <span class="fragment highlight-bg-green" data-fragment-index="12">func(3, [])</span>));</span>
+<span class="fragment bluebg" data-fragment-index="2">return func(1, func(2, func(3, [])));</span>
+<span class="fragment" data-fragment-index="18">return cons(1, cons(2, cons(3, [])));</span>
                                 </code></pre>
                                         </section>
                                         <section>
@@ -641,16 +613,16 @@ var cons = function(element, list) {
 
 <span class="fragment">var map = function(func, list) {
     return foldR(function(x, acc) { 
-        <span class="fragment highlight-bg-green">return cons(func(x), acc)</span> 
-    }, [], list)
+        <span class="fragment highlight-bg-green">return cons(func(x), acc);</span> 
+    }, [], list);
 }
 map(function(str) { return str.toUpperCase() }, list);
 // ['MAP', 'FILTER', 'FOLD']</span>
 
 <span class="fragment">var filter = function(pred, list) {
     return foldR(function(x, acc) { 
-        <span class="fragment highlight-bg-green">return pred(x) ? cons(x, acc) : acc</span> 
-    }, [], list) 
+        <span class="fragment highlight-bg-green">return pred(x) ? cons(x, acc) : acc;</span> 
+    }, [], list);
 }
 filter(function(str) { return str.charAt(0) === 'M' }, list);
 // ['Map']</span></code></pre>
