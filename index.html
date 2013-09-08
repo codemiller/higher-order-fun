@@ -522,13 +522,13 @@ sum([1, 2, 3]); // 6
                                             <pre><code data-noescape class="javascript">
 var sum = <span class="fragment highlight-bg-green" data-fragment-index="3">function(list, initVal) {
     if (list.length === 0) { return initVal }</span>
-    return <span class="fragment highlight-bg-red" data-fragment-index="4">sum</span>(<span class="fragment highlight-bg-blue" data-fragment-index="5">list.slice(1)</span>, <span class="fragment highlight-bg-purple" data-fragment-index="6">list[0] + initVal</span>); 
+    return <span class="fragment highlight-bg-red" data-fragment-index="4">sum</span>(<span class="fragment highlight-bg-blue" data-fragment-index="5">list.slice(1)</span>, <span class="fragment highlight-bg-purple" data-fragment-index="6">initVal + list[0]</span>); 
 }
 sum([1, 2, 3], 0); // 6
 
 <span class="fragment" data-fragment-index="1">var length = <span class="fragment highlight-bg-green" data-fragment-index="3">function(list, initVal) {
     if (list.length === 0) { return initVal }</span>
-    return <span class="fragment highlight-bg-red" data-fragment-index="4">length</span>(<span class="fragment highlight-bg-blue" data-fragment-index="5">list.slice(1)</span>, <span class="fragment highlight-bg-purple" data-fragment-index="6">1 + initVal</span>);
+    return <span class="fragment highlight-bg-red" data-fragment-index="4">length</span>(<span class="fragment highlight-bg-blue" data-fragment-index="5">list.slice(1)</span>, <span class="fragment highlight-bg-purple" data-fragment-index="6">initVal + 1</span>);
 }
 length([1, 2, 3], 0); // 3</spam>
 
