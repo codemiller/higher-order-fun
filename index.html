@@ -550,7 +550,7 @@ var foldL = <span class="fragment highlight-bg-green" data-fragment-index="1">fu
 var sum = function(list) { 
     foldL(<span class="fragment highlight-bg-purple" data-fragment-index="10">function(acc, x)</span> { return acc + x }, 0, list);
 }
-sum([1,2,3]);
+sum([1, 2, 3]);
 // 6 = (((0 + 1) + 2) + 3)
 
 <span class="fragment" data-fragment-index="5">var foldR = <span class="fragment highlight-bg-green" data-fragment-index="6">function(func, initVal, list) {
@@ -560,7 +560,7 @@ sum([1,2,3]);
 var sum2 = function(list) {
     foldR(<span class="fragment highlight-bg-purple" data-fragment-index="10">function(x, acc)</span> { return x + acc }, 0, list);
 }
-sum2([1,2,3]);
+sum2([1, 2, 3]);
 // 6 = (1 + (2 + (3 + 0)))</span></code></pre>
                                         </section> 
                                         <section>
@@ -569,12 +569,12 @@ var cons = function(element, list) {
     return [element].concat(list);
 }
 
-foldL(function(acc, x) { return cons(x, acc) }, [], [1,2,3]);
+foldL(function(acc, x) { return cons(x, acc) }, [], [1, 2, 3]);
 // [3, 2, 1]
 <span class="fragment fade-in initial-back" data-fragment-index="10" id="series4">return <span class="greenbg">[3, 2, 1]</span>;</span><span class="fragment fade-in initial-back" data-fragment-index="8" id="series3">return <span class="fragment highlight-bg-green" data-fragment-index="9">func(<span class="greenbg">[2, 1]</span>, 3)</span>;</span><span class="fragment fade-in initial-back" data-fragment-index="6" id="series2">return func(<span class="fragment highlight-bg-green" data-fragment-index="7">func(<span class="greenbg">[1]</span>, 2)</span>, 3);</span><span class="fragment fade-in initial-front" data-fragment-index="3" id="series1">return func(func(<span class="fragment highlight-bg-green" data-fragment-index="4">func([], 1)</span>, 2), 3);</span>
 <span class="fragment bluebg" data-fragment-index="1">return func(func(func([], 1), 2), 3);</span>
 
-foldR(function(x, acc) { return cons(x, acc) }, [], [1,2,3]);
+foldR(function(x, acc) { return cons(x, acc) }, [], [1, 2, 3]);
 // [1, 2, 3]  
 <span class="fragment fade-in initial-back" data-fragment-index="17" id="series9">return <span class="greenbg">[1, 2, 3]</span>;</span><span class="fragment fade-in initial-back" data-fragment-index="15" id="series8">return <span class="fragment highlight-bg-green" data-fragment-index="16">func(1, <span class="greenbg">[2, 3]</span>)</span>;</span><span class="fragment fade-in initial-back" data-fragment-index="13" id="series7">return func(1, <span class="fragment highlight-bg-green" data-fragment-index="14">func(2, <span class="greenbg">[3]</span>)</span>);</span><span class="fragment fade-in initial-front" data-fragment-index="11" id="series6">return func(1, func(2, <span class="fragment highlight-bg-green" data-fragment-index="12">func(3, [])</span>));</span>
 <span class="fragment bluebg" data-fragment-index="2">return func(1, func(2, func(3, [])));</span>
