@@ -545,7 +545,7 @@ reverse([1, 2, 3], []); // [3, 2, 1]</span>
                                             <pre><code data-noescape class="javascript">
 var foldL = <span class="fragment highlight-bg-green" data-fragment-index="1">function(func, initVal, list) {
     if (list.length === 0) { return initVal }</span>
-    return <span class="fragment highlight-bg-red" data-fragment-index="2">foldL</span>(func, <span class="fragment highlight-bg-purple" data-fragment-index="4">func(initVal, list[0])</span>, <span class="fragment highlight-bg-blue" data-fragment-index="3">list.slice(1)</span>);
+    return <span class="fragment highlight-bg-red" data-fragment-index="2">foldL</span>(func, <span class="fragment highlight-bg-purple" data-fragment-index="4">func(initVal, list[0])</span>, <span class="fragment highlight-bg-blue" data-fragment-index="3">list.slice(1)</span>) 
 }
 var sum = function(list) { 
     foldL(<span class="fragment highlight-bg-purple" data-fragment-index="10">function(acc, x)</span> { return acc + x }, 0, list);
@@ -555,7 +555,7 @@ sum([1, 2, 3]);
 
 <span class="fragment" data-fragment-index="5">var foldR = <span class="fragment highlight-bg-green" data-fragment-index="6">function(func, initVal, list) {
     if (list.length === 0) { return initVal }</span>
-    return <span class="fragment highlight-bg-purple" data-fragment-index="9">func(list[0], <span class="fragment highlight-bg-red" data-fragment-index="8">foldR</span>(func, initVal, <span class="fragment highlight-bg-blue" data-fragment-index="7">list.slice(1)</span>));</span>
+    return <span class="fragment highlight-bg-purple" data-fragment-index="9">func(list[0], <span class="fragment highlight-bg-red" data-fragment-index="8">foldR</span>(func, initVal, <span class="fragment highlight-bg-blue" data-fragment-index="7">list.slice(1)</span>))</span>
 }
 var sum2 = function(list) {
     foldR(<span class="fragment highlight-bg-purple" data-fragment-index="10">function(x, acc)</span> { return x + acc }, 0, list);
