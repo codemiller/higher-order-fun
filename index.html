@@ -577,7 +577,7 @@ foldL(function(acc, x) { return cons(x, acc) }, [], [1, 2, 3]);
 foldR(function(x, acc) { return cons(x, acc) }, [], [1, 2, 3]);
 // [1, 2, 3]  
 <span class="fragment fade-in initial-back" data-fragment-index="17" id="series9">return <span class="greenbg">[1, 2, 3]</span>;</span><span class="fragment fade-in initial-back" data-fragment-index="15" id="series8">return <span class="fragment highlight-bg-green" data-fragment-index="16">func(1, <span class="greenbg">[2, 3]</span>)</span>;</span><span class="fragment fade-in initial-back" data-fragment-index="13" id="series7">return func(1, <span class="fragment highlight-bg-green" data-fragment-index="14">func(2, <span class="greenbg">[3]</span>)</span>);</span><span class="fragment fade-in initial-front" data-fragment-index="11" id="series6">return func(1, func(2, <span class="fragment highlight-bg-green" data-fragment-index="12">func(3, [])</span>));</span>
-<span class="fragment bluebg" data-fragment-index="2">return func(1, func(2, func(3, [])));</span>
+<span class="fragment bluebg" data-fragment-index="1">return func(1, func(2, func(3, [])));</span>
 <span class="fragment" data-fragment-index="18">return cons(1, cons(2, cons(3, [])));</span>
                                 </code></pre>
                                         </section>
