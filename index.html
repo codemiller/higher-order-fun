@@ -526,11 +526,11 @@ var sum = <span class="fragment highlight-bg-green" data-fragment-index="3">func
 };
 sum([1, 2, 3], 0); // 6
 
-<span class="fragment" data-fragment-index="1">var length = <span class="fragment highlight-bg-green" data-fragment-index="3">function(list, acc) {
+<span class="fragment" data-fragment-index="1">var product = <span class="fragment highlight-bg-green" data-fragment-index="3">function(list, acc) {
     if (list.length === 0) { return acc }</span>
-    return <span class="fragment highlight-bg-red" data-fragment-index="4">length</span>(<span class="fragment highlight-bg-blue" data-fragment-index="5">list.slice(1)</span>, <span class="fragment highlight-bg-purple" data-fragment-index="6">acc + 1</span>);
+    return <span class="fragment highlight-bg-red" data-fragment-index="4">product</span>(<span class="fragment highlight-bg-blue" data-fragment-index="5">list.slice(1)</span>, <span class="fragment highlight-bg-purple" data-fragment-index="6">acc * list[0]</span>);
 };
-length([1, 2, 3], 0); // 3</spam>
+length([1, 2, 3], 1); // 6</span>
 
 <span class="fragment" data-fragment-index="2">var reverse = <span class="fragment highlight-bg-green" data-fragment-index="3">function(list, acc) {
     if (list.length === 0) { return acc }</span>
@@ -545,26 +545,27 @@ reverse([1, 2, 3], []); // [3, 2, 1]</span>
                                             <pre><code data-noescape class="javascript">
 var foldL = <span class="fragment highlight-bg-green" data-fragment-index="1">function(func, acc, list) {
     if (list.length === 0) { return acc }</span>
-    return <span class="fragment highlight-bg-red" data-fragment-index="2">foldL</span>(func, <span class="fragment highlight-bg-purple" data-fragment-index="4">func(acc, list[0])</span>, <span class="fragment highlight-bg-blue" data-fragment-index="3">list.slice(1)</span>) 
-}
+    return <span class="fragment highlight-bg-red" data-fragment-index="2">foldL</span>(func, <span class="fragment highlight-bg-purple" data-fragment-index="4">func(acc, list[0])</span>, <span class="fragment highlight-bg-blue" data-fragment-index="3">list.slice(1)</span>); 
+};
 var sum = function(list) { 
     return foldL(<span class="fragment highlight-bg-purple" data-fragment-index="10">function(acc, x)</span> { return acc + x }, 0, list);
-}
+};
 sum([1, 2, 3]);
 // 6 = (((0 + 1) + 2) + 3)
 
 <span class="fragment" data-fragment-index="5">var foldR = <span class="fragment highlight-bg-green" data-fragment-index="6">function(func, acc, list) {
     if (list.length === 0) { return acc }</span>
-    return <span class="fragment highlight-bg-purple" data-fragment-index="9">func(list[0], <span class="fragment highlight-bg-red" data-fragment-index="8">foldR</span>(func, acc, <span class="fragment highlight-bg-blue" data-fragment-index="7">list.slice(1)</span>))</span>
-}
+    return <span class="fragment highlight-bg-purple" data-fragment-index="9">func(list[0], <span class="fragment highlight-bg-red" data-fragment-index="8">foldR</span>(func, acc, <span class="fragment highlight-bg-blue" data-fragment-index="7">list.slice(1)</span>));</span>
+};
 var sum2 = function(list) {
     return foldR(<span class="fragment highlight-bg-purple" data-fragment-index="10">function(x, acc)</span> { return x + acc }, 0, list);
-}
+};
 sum2([1, 2, 3]);
 // 6 = (1 + (2 + (3 + 0)))</span></code></pre>
                                         </section> 
                                         <section>
                                              <pre><code data-noescape class="javascript">
+// Prepend element
 var cons = function(element, list) {
     return [element].concat(list);
 }
@@ -594,13 +595,13 @@ foldR(function(x, acc) { return cons(x, acc) }, [], [1, 2, 3]);
                                             <pre><code data-noescape class="javascript">var list = ['Map', 'Filter', 'Fold'];
 var cons = function(element, list) {
     return [element].concat(list);
-}
+};
 
 <span class="fragment">var map = function(func, list) {
     return foldR(function(x, acc) { 
         <span class="fragment highlight-bg-green">return cons(func(x), acc);</span> 
     }, [], list);
-}
+};
 map(function(str) { return str.toUpperCase() }, list);
 // ['MAP', 'FILTER', 'FOLD']</span>
 
@@ -608,7 +609,7 @@ map(function(str) { return str.toUpperCase() }, list);
     return foldR(function(x, acc) { 
         <span class="fragment highlight-bg-green">return pred(x) ? cons(x, acc) : acc;</span> 
     }, [], list);
-}
+};
 filter(function(str) { return str.charAt(0) === 'M' }, list);
 // ['Map']</span></code></pre>
                                         </section>   
