@@ -175,7 +175,7 @@
                                                 <pre><code data-noescape class="javascript">
 var add = function(arg1, arg2) {
     return arg1 + arg2;
-}
+};
 
 <span class="fragment initial-back" data-fragment-index="5" id="functoappear"><span class="greenbg">    3    </span> + " Musketeers";
 // "3 Musketeers"
@@ -204,7 +204,7 @@ var impureAdd = function(arg1, arg2) {
         <span class="fragment highlight-bg-red" data-fragment-index="2">launchMissile();</span>
     }
     return arg1 + arg2;
-}
+};
 
 <span class="fragment" data-fragment-index="3">impureAdd(1, 2) + " Musketeers";
 // "3 Musketeers"</span>
@@ -234,7 +234,7 @@ var startsWith = function(name) {
     <span class="fragment highlight-bg-green">return function() { 
         return "Name starts with " + firstLetter; 
     };</span>
-}
+};
 
 var myName = startsWith("Katie");
 var languageName = startsWith("JavaScript");
@@ -354,20 +354,20 @@ conceptually, one must provide new kinds of glue in the programming language. ..
                                             <pre><code data-noescape class="javascript">var list = ['Map', 'Filter', 'Fold'];
 
 var imperative = function(list) {
-    result = [];
+    var result = [];
     for(var i = 0; i < list.length; i++) {
         result.push(list[i].toUpperCase());
     }
     return result;
-}
+};
 
-<span class="fragment">var functional = function(list, func) {
-    return _.map(list, func);
-}</span>
+<span class="fragment">var functional = function(list) {
+    return _.map(list, function(str) { return str.toUpperCase() });
+};</span>
 
 <span class="fragment">imperative(list);
 // ['MAP', 'FILTER', 'FOLD']
-functional(list, function(str) { return str.toUpperCase() });
+functional(list);
 // ['MAP', 'FILTER', 'FOLD']</span>                          </code></pre>  
                                         </section>    
                                         <section>
@@ -426,24 +426,24 @@ functional(list, function(str) { return str.toUpperCase() });
                                             <h2>Imperative vs Functional</h2> 
                                             <pre><code data-noescape class="javascript">var list = ['Map', 'Filter', 'Fold'];
 var imperative = function(list, letter) {
-    result = [];
+    var result = [];
     for(var i = 0; i < list.length; i++) {
         if (list[i].charAt(0) === letter) {
             result.push(list[i]) 
         }
     }
     return result;
-}
+};
 
-<span class="fragment">var functional = function(list, pred) {
-    return _.filter(list, pred);
-}</span>
+<span class="fragment">var functional = function(list, letter) {
+    return _.filter(list, startsWith(letter));
+};</span>
 <span class="fragment">var startsWith = function(l) { 
     return function(s) { return s.charAt(0) === l }
-}
+};
 </span><span class="fragment">
-imperative(list, 'F');             // ['Filter', 'Fold']
-functional(list, startsWith('F')); // ['Filter', 'Fold']</span></code></pre>  
+imperative(list, 'F'); // ['Filter', 'Fold']
+functional(list, 'F'); // ['Filter', 'Fold']</span></code></pre>  
                                         </section>    
                                         <section>
                                             <h2>Language Support</h2>
@@ -506,11 +506,11 @@ functional(list, startsWith('F')); // ['Filter', 'Fold']</span></code></pre>
                                             <h2>Imperative Approach</h2> 
                                             <pre><code data-noescape class="javascript">
 var sum = function(list) {
-    var initVal = 0;
+    var acc = 0;
     for (var i = 0; i < list.length; i++) {
-        initVal += list[i];
+        acc += list[i];
     }
-    return initVal;
+    return acc;
 };
 
 sum([1, 2, 3]); // 6
@@ -520,22 +520,22 @@ sum([1, 2, 3]); // 6
                                         <section>
                                             <h2>Recursive Pattern</h2> 
                                             <pre><code data-noescape class="javascript">
-var sum = <span class="fragment highlight-bg-green" data-fragment-index="3">function(list, initVal) {
-    if (list.length === 0) { return initVal }</span>
-    return <span class="fragment highlight-bg-red" data-fragment-index="4">sum</span>(<span class="fragment highlight-bg-blue" data-fragment-index="5">list.slice(1)</span>, <span class="fragment highlight-bg-purple" data-fragment-index="6">initVal + list[0]</span>); 
-}
+var sum = <span class="fragment highlight-bg-green" data-fragment-index="3">function(list, acc) {
+    if (list.length === 0) { return acc }</span>
+    return <span class="fragment highlight-bg-red" data-fragment-index="4">sum</span>(<span class="fragment highlight-bg-blue" data-fragment-index="5">list.slice(1)</span>, <span class="fragment highlight-bg-purple" data-fragment-index="6">acc + list[0]</span>); 
+};
 sum([1, 2, 3], 0); // 6
 
-<span class="fragment" data-fragment-index="1">var length = <span class="fragment highlight-bg-green" data-fragment-index="3">function(list, initVal) {
-    if (list.length === 0) { return initVal }</span>
-    return <span class="fragment highlight-bg-red" data-fragment-index="4">length</span>(<span class="fragment highlight-bg-blue" data-fragment-index="5">list.slice(1)</span>, <span class="fragment highlight-bg-purple" data-fragment-index="6">initVal + 1</span>);
-}
+<span class="fragment" data-fragment-index="1">var length = <span class="fragment highlight-bg-green" data-fragment-index="3">function(list, acc) {
+    if (list.length === 0) { return acc }</span>
+    return <span class="fragment highlight-bg-red" data-fragment-index="4">length</span>(<span class="fragment highlight-bg-blue" data-fragment-index="5">list.slice(1)</span>, <span class="fragment highlight-bg-purple" data-fragment-index="6">acc + 1</span>);
+};
 length([1, 2, 3], 0); // 3</spam>
 
-<span class="fragment" data-fragment-index="2">var reverse = <span class="fragment highlight-bg-green" data-fragment-index="3">function(list, initVal) {
-    if (list.length === 0) { return initVal }</span>
-    return <span class="fragment highlight-bg-red" data-fragment-index="4">reverse</span>(<span class="fragment highlight-bg-blue" data-fragment-index="5">list.slice(1)</span>, <span class="fragment highlight-bg-purple" data-fragment-index="6">[list[0]].concat(initVal)</span>);
-}
+<span class="fragment" data-fragment-index="2">var reverse = <span class="fragment highlight-bg-green" data-fragment-index="3">function(list, acc) {
+    if (list.length === 0) { return acc }</span>
+    return <span class="fragment highlight-bg-red" data-fragment-index="4">reverse</span>(<span class="fragment highlight-bg-blue" data-fragment-index="5">list.slice(1)</span>, <span class="fragment highlight-bg-purple" data-fragment-index="6">[list[0]].concat(acc)</span>);
+};
 reverse([1, 2, 3], []); // [3, 2, 1]</span>
 
 </code></pre>                                               
@@ -543,22 +543,22 @@ reverse([1, 2, 3], []); // [3, 2, 1]</span>
                                         <section>
                                             <h2>Defining Fold</h2>
                                             <pre><code data-noescape class="javascript">
-var foldL = <span class="fragment highlight-bg-green" data-fragment-index="1">function(func, initVal, list) {
-    if (list.length === 0) { return initVal }</span>
-    return <span class="fragment highlight-bg-red" data-fragment-index="2">foldL</span>(func, <span class="fragment highlight-bg-purple" data-fragment-index="4">func(initVal, list[0])</span>, <span class="fragment highlight-bg-blue" data-fragment-index="3">list.slice(1)</span>) 
+var foldL = <span class="fragment highlight-bg-green" data-fragment-index="1">function(func, acc, list) {
+    if (list.length === 0) { return acc }</span>
+    return <span class="fragment highlight-bg-red" data-fragment-index="2">foldL</span>(func, <span class="fragment highlight-bg-purple" data-fragment-index="4">func(acc, list[0])</span>, <span class="fragment highlight-bg-blue" data-fragment-index="3">list.slice(1)</span>) 
 }
 var sum = function(list) { 
-    foldL(<span class="fragment highlight-bg-purple" data-fragment-index="10">function(acc, x)</span> { return acc + x }, 0, list);
+    return foldL(<span class="fragment highlight-bg-purple" data-fragment-index="10">function(acc, x)</span> { return acc + x }, 0, list);
 }
 sum([1, 2, 3]);
 // 6 = (((0 + 1) + 2) + 3)
 
-<span class="fragment" data-fragment-index="5">var foldR = <span class="fragment highlight-bg-green" data-fragment-index="6">function(func, initVal, list) {
-    if (list.length === 0) { return initVal }</span>
-    return <span class="fragment highlight-bg-purple" data-fragment-index="9">func(list[0], <span class="fragment highlight-bg-red" data-fragment-index="8">foldR</span>(func, initVal, <span class="fragment highlight-bg-blue" data-fragment-index="7">list.slice(1)</span>))</span>
+<span class="fragment" data-fragment-index="5">var foldR = <span class="fragment highlight-bg-green" data-fragment-index="6">function(func, acc, list) {
+    if (list.length === 0) { return acc }</span>
+    return <span class="fragment highlight-bg-purple" data-fragment-index="9">func(list[0], <span class="fragment highlight-bg-red" data-fragment-index="8">foldR</span>(func, acc, <span class="fragment highlight-bg-blue" data-fragment-index="7">list.slice(1)</span>))</span>
 }
 var sum2 = function(list) {
-    foldR(<span class="fragment highlight-bg-purple" data-fragment-index="10">function(x, acc)</span> { return x + acc }, 0, list);
+    return foldR(<span class="fragment highlight-bg-purple" data-fragment-index="10">function(x, acc)</span> { return x + acc }, 0, list);
 }
 sum2([1, 2, 3]);
 // 6 = (1 + (2 + (3 + 0)))</span></code></pre>
@@ -582,27 +582,12 @@ foldR(function(x, acc) { return cons(x, acc) }, [], [1, 2, 3]);
                                 </code></pre>
                                         </section>
                                         <section>
-                                            <h2>Fold Left vs Fold Right</h2> 
-                                            <table class="leftTable">
-                                                <th>Fold Left</th>
-                                                <th>Fold Right</th>
-                                                <tr>
-                                                    <td>Left associative</td>
-                                                    <td>Right associative</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Works like a for-loop with an accumulator</td>
-                                                    <td>Works by replacing cons (list construction) with your function</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Never works with infinite structures</td>
-                                                    <td>Can potentially work with infinite structures</td>
-                                                </tr>    
-                                                <tr>
-                                                    <td>Strict version useful for processing large lists when tail-call optimised</td>
-                                                    <td>Can be implemented with Fold Left for finite structures</td>
-                                                </tr>                                       
-                                            </table>
+                                            <h2>More About Folds</h2> 
+                                            <ul>
+                                                <li>Fold Left is left associative; Fold Right is right associative</li>
+                                                <li>Folds can be used to summarise structures such as lists, trees, or tables of data</li>
+                                                <li>Fold Right can be implemented with Fold Left and Reverse, provided you are working with finite data structures; in Haskell, Fold Right can potentially operate on infinite structures, while Fold Left cannot</li>
+                                            </ul>
                                         </section>  
                                         <section>
                                             <h2>Defining Map/Filter with Fold</h2>
@@ -637,30 +622,30 @@ filter(function(str) { return str.charAt(0) === 'M' }, list);
                                                 <tr>
                                                     <td class="bold">Clojure</td>
                                                     <td class="yes-cell">Yes</td>
-                                                    <td>(reduce <em>func initval list</em>)</td>
-                                                    <td>(reduce <em>func initval </em> (reverse <em>list</em>))</td>
+                                                    <td>(reduce <em>func acc list</em>)</td>
+                                                    <td>(reduce <em>func acc </em> (reverse <em>list</em>))</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="bold">JavaScript</td>
                                                     <td class="yes-cell">1.8</td>
-                                                    <td><em>array</em>.reduce(<em>func</em>, <em>initval</em>)</td>
-                                                    <td><em>array</em>.reduceRight(<em>func</em>, <em>initval</em>)</td>
+                                                    <td><em>array</em>.reduce(<em>func</em>, <em>acc</em>)</td>
+                                                    <td><em>array</em>.reduceRight(<em>func</em>, <em>acc</em>)</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="bold">Python</td>
                                                     <td class="yes-cell">2.x yes; 3.x in <em>functools</em></td>
-                                                    <td>reduce(<em>func</em>, <em>list</em>, <em>initval</em>)</td>
-                                                    <td>reduce(lambda x,y: <em>func</em>(y,x), reversed(<em>list</em>), <em>initval</em>)</td>
+                                                    <td>reduce(<em>func</em>, <em>list</em>, <em>acc</em>)</td>
+                                                    <td>reduce(lambda x,y: <em>func</em>(y,x), reversed(<em>list</em>), <em>acc</em>)</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="bold">Ruby</td>
                                                     <td class="yes-cell">Yes</td>
-                                                    <td><em>enum</em>.reduce(<em>initval</em>, <em>&block</em>)</td>
-                                                    <td><em>enum</em>.reverse_each.reduce(<em>initval</em>, <em>&block</em>)</td>
+                                                    <td><em>enum</em>.inject(<em>acc</em>, <em>&block</em>)</td>
+                                                    <td><em>enum</em>.reverse_each.inject(<em>acc</em>, <em>&block</em>)</td>
                                                 </tr>
                                                 <tr>
                                                     <td style="font-size: 18px;"><em>Ruby Notes:</em></td>
-                                                    <td colspan="3" style="font-size: 15px;"><em>In Ruby, reduce also called inject. In 1.8.7+ symbol can be passed instead of block. If enumeration is array, use reverse instead of reverse_each.</td>
+                                                    <td colspan="3" style="font-size: 15px;"><em>In 1.8.7+ symbol can be passed instead of block. If enumeration is array, use reverse instead of reverse_each.</td>
                                                 </tr>
                                             </table>
                                             <p style="font-size: 45%; padding-top: 10px; float: left;">Source: <a href="http://en.wikipedia.org/wiki/Fold_(higher-order_function)#Folds_in_various_languages" target="_blank">Wikipedia</a></p>
