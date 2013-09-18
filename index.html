@@ -33,7 +33,7 @@
 			.initial-back { position: absolute; z-index: 2; }
                         #functoappear.visible ~ #functohide, #series2.visible ~ #series1, #series3.visible ~ #series2, #series4.visible ~ #series3, #series5.visible ~ #series4,
                         #series7.visible ~ #series6, #series8.visible ~ #series7, #series9.visible ~ #series8, #series10.visible ~ #series9, #funcseries2.visible ~ #funcseries1, 
-                        #funcseries3.visible ~ #funcseries2, #funcseries4.visible ~ #funcseries3, #funcseries5.visible ~ #funcseries4 { opacity: 0; visibility: hidden; }
+                        #funcseries3.visible ~ #funcseries2, #funcseries4.visible ~ #funcseries3, #funcseries5.visible ~ #funcseries4, #foldRight.visible ~ #foldLeftLoop { opacity: 0; visibility: hidden; }
                         .yes-cell { background: #90ff90; }
                         .no-cell { background: #ff9090; }
                         .partial-cell { background: #ffb; }
@@ -542,26 +542,36 @@ reverse([1, 2, 3], []); // [3, 2, 1]</span>
                                         </section> 
                                         <section>
                                             <h2>Defining Fold</h2>
-                                            <pre><code data-noescape class="javascript">
+                                           <pre><code data-noescape class="javascript">
 var foldL = <span class="fragment highlight-bg-green" data-fragment-index="1">function(func, acc, list) {
     if (list.length === 0) { return acc }</span>
-    return <span class="fragment highlight-bg-red" data-fragment-index="2">foldL</span>(func, <span class="fragment highlight-bg-purple" data-fragment-index="4">func(acc, list[0])</span>, <span class="fragment highlight-bg-blue" data-fragment-index="3">list.slice(1)</span>); 
+    return <span class="fragment highlight-bg-red" data-fragment-index="2">foldL</span>(func, <span class="fragment highlight-bg-purple" data-fragment-index="4">func(acc, list[0])</span>, <span class="fragment highlight-bg-blue" data-fragment-index="3">list.slice(1)</span>);
 };
 var sum = function(list) { 
-    return foldL(<span class="fragment highlight-bg-purple" data-fragment-index="10">function(acc, x)</span> { return acc + x }, 0, list);
+    return foldL(<span class="fragment highlight-bg-purple" data-fragment-index="11">function(acc, x)</span> { return acc + x }, 0, list);
 };
 sum([1, 2, 3]);
 // 6 = (((0 + 1) + 2) + 3)
-
-<span class="fragment" data-fragment-index="5">var foldR = <span class="fragment highlight-bg-green" data-fragment-index="6">function(func, acc, list) {
+<span class="fragment initial-back" data-fragment-index="6" id="foldRight">
+var foldR = <span class="fragment highlight-bg-green" data-fragment-index="7">function(func, acc, list) {
     if (list.length === 0) { return acc }</span>
-    return <span class="fragment highlight-bg-purple" data-fragment-index="9">func(list[0], <span class="fragment highlight-bg-red" data-fragment-index="8">foldR</span>(func, acc, <span class="fragment highlight-bg-blue" data-fragment-index="7">list.slice(1)</span>));</span>
+    return <span class="fragment highlight-bg-purple" data-fragment-index="10">func(list[0], <span class="fragment highlight-bg-red" data-fragment-index="9">foldR</span>(func, acc, <span class="fragment highlight-bg-blue" data-fragment-index="8">list.slice(1)</span>));</span>
 };
 var sum2 = function(list) {
-    return foldR(<span class="fragment highlight-bg-purple" data-fragment-index="10">function(x, acc)</span> { return x + acc }, 0, list);
+    return foldR(<span class="fragment highlight-bg-purple" data-fragment-index="11">function(x, acc)</span> { return x + acc }, 0, list);
 };
 sum2([1, 2, 3]);
-// 6 = (1 + (2 + (3 + 0)))</span></code></pre>
+// 6 = (1 + (2 + (3 + 0)))</span>
+<span class="fragment initial-front" data-fragment-index="5" id="foldLeftLoop">var foldL2 = function(func, acc, list) {
+    for(var i = 0; i < list.length; i++) {
+        acc = func(acc, list[i]);
+    }
+    return acc;
+};
+
+
+
+</span></code></pre>
                                         </section> 
                                         <section>
                                              <pre><code data-noescape class="javascript">
@@ -583,7 +593,7 @@ foldR(function(x, acc) { return cons(x, acc) }, [], [1, 2, 3]);
                                 </code></pre>
                                         </section>
                                         <section>
-                                            <h2>More About Folds</h2> 
+                                            <h2>More About Fold</h2> 
                                             <ul>
                                                 <li>Fold Left is left associative; Fold Right is right associative</li>
                                                 <li>Folds can be used to summarise structures such as lists, trees, or tables of data</li>
