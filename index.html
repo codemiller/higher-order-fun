@@ -174,7 +174,7 @@
                                         <section>
                                                 <pre><code data-noescape class="javascript">
 var add = function(arg1, arg2) {
-    return arg1 + arg2;
+  return arg1 + arg2;
 };
 
 <span class="fragment initial-back" data-fragment-index="5" id="functoappear"><span class="greenbg">    3    </span> + " Musketeers";
@@ -198,12 +198,12 @@ var add = function(arg1, arg2) {
                                         <section>
                                                 <pre><code data-noescape class="javascript"><span class="fragment fade-out" id="blackout" data-fragment-index="7">
 var impureAdd = function(arg1, arg2) {
-    <span class="fragment highlight-bg-red" data-fragment-index="1">assessSituation();</span>
-    <span class="fragment highlight-bg-red" data-fragment-index="1">if (warDeclared)</span> {
-        <span class="fragment highlight-bg-red" data-fragment-index="2">console.log("Impending doom...");</span>
-        <span class="fragment highlight-bg-red" data-fragment-index="2">launchMissile();</span>
-    }
-    return arg1 + arg2;
+  <span class="fragment highlight-bg-red" data-fragment-index="1">assessSituation();</span>
+  <span class="fragment highlight-bg-red" data-fragment-index="1">if (warDeclared)</span> {
+    <span class="fragment highlight-bg-red" data-fragment-index="2">console.log("Impending doom...");</span>
+    <span class="fragment highlight-bg-red" data-fragment-index="2">launchMissile();</span>
+  }
+  return arg1 + arg2;
 };
 
 <span class="fragment" data-fragment-index="3">impureAdd(1, 2) + " Musketeers";
@@ -230,10 +230,10 @@ var impureAdd = function(arg1, arg2) {
                                             <h2>Closures</h2>
                                             <pre><code data-noescape class="javascript">
 var startsWith = function(name) {
-    var firstLetter = name.charAt(0);
-    <span class="fragment highlight-bg-green">return function() { 
-        return "Name starts with " + firstLetter; 
-    };</span>
+  var firstLetter = name.charAt(0);
+  <span class="fragment highlight-bg-green">return function() { 
+    return "Name starts with " + firstLetter; 
+  };</span>
 };
 
 var myName = startsWith("Katie");
@@ -354,15 +354,15 @@ conceptually, one must provide new kinds of glue in the programming language. ..
                                             <pre><code data-noescape class="javascript">var list = ['Map', 'Filter', 'Fold'];
 
 var imperative = function(list) {
-    var result = [];
-    for(var i = 0; i < list.length; i++) {
-        result.push(list[i].toUpperCase());
-    }
-    return result;
+  var result = [];
+  for(var i = 0; i < list.length; i++) {
+    result.push(list[i].toUpperCase());
+  }
+  return result;
 };
 
 <span class="fragment">var functional = function(list) {
-    return _.map(list, function(str) { return str.toUpperCase() });
+  return _.map(list, function(str) { return str.toUpperCase() });
 };</span>
 
 <span class="fragment">imperative(list);
@@ -426,20 +426,20 @@ functional(list);
                                             <h2>Imperative vs Functional</h2> 
                                             <pre><code data-noescape class="javascript">var list = ['Map', 'Filter', 'Fold'];
 var imperative = function(list, letter) {
-    var result = [];
-    for(var i = 0; i < list.length; i++) {
-        if (list[i].charAt(0) === letter) {
-            result.push(list[i]) 
-        }
+  var result = [];
+  for(var i = 0; i < list.length; i++) {
+    if (list[i].charAt(0) === letter) {
+      result.push(list[i]) 
     }
-    return result;
+  }
+  return result;
 };
 
 <span class="fragment">var functional = function(list, letter) {
-    return _.filter(list, startsWith(letter));
+  return _.filter(list, startsWith(letter));
 };</span>
 <span class="fragment">var startsWith = function(l) { 
-    return function(s) { return s.charAt(0) === l }
+  return function(s) { return s.charAt(0) === l }
 };
 </span><span class="fragment">
 imperative(list, 'F'); // ['Filter', 'Fold']
@@ -506,11 +506,11 @@ functional(list, 'F'); // ['Filter', 'Fold']</span></code></pre>
                                             <h2>Imperative Approach</h2> 
                                             <pre><code data-noescape class="javascript">
 var sum = function(list) {
-    var acc = 0;
-    for (var i = 0; i < list.length; i++) {
-        acc += list[i];
-    }
-    return acc;
+  var acc = 0;
+  for (var i = 0; i < list.length; i++) {
+    acc += list[i];
+  }
+  return acc;
 };
 
 sum([1, 2, 3]); // 6
@@ -521,20 +521,20 @@ sum([1, 2, 3]); // 6
                                             <h2>Recursive Pattern</h2> 
                                             <pre><code data-noescape class="javascript">
 var sum = <span class="fragment highlight-bg-green" data-fragment-index="3">function(list, acc) {
-    if (list.length === 0) { return acc }</span>
-    return <span class="fragment highlight-bg-red" data-fragment-index="4">sum</span>(<span class="fragment highlight-bg-blue" data-fragment-index="5">list.slice(1)</span>, <span class="fragment highlight-bg-purple" data-fragment-index="6">acc + list[0]</span>); 
+  if (list.length === 0) { return acc }</span>
+  return <span class="fragment highlight-bg-red" data-fragment-index="4">sum</span>(<span class="fragment highlight-bg-blue" data-fragment-index="5">list.slice(1)</span>, <span class="fragment highlight-bg-purple" data-fragment-index="6">acc + list[0]</span>); 
 };
 sum([1, 2, 3], 0); // 6
 
 <span class="fragment" data-fragment-index="1">var product = <span class="fragment highlight-bg-green" data-fragment-index="3">function(list, acc) {
-    if (list.length === 0) { return acc }</span>
-    return <span class="fragment highlight-bg-red" data-fragment-index="4">product</span>(<span class="fragment highlight-bg-blue" data-fragment-index="5">list.slice(1)</span>, <span class="fragment highlight-bg-purple" data-fragment-index="6">acc * list[0]</span>);
+  if (list.length === 0) { return acc }</span>
+  return <span class="fragment highlight-bg-red" data-fragment-index="4">product</span>(<span class="fragment highlight-bg-blue" data-fragment-index="5">list.slice(1)</span>, <span class="fragment highlight-bg-purple" data-fragment-index="6">acc * list[0]</span>);
 };
 length([1, 2, 3], 1); // 6</span>
 
 <span class="fragment" data-fragment-index="2">var reverse = <span class="fragment highlight-bg-green" data-fragment-index="3">function(list, acc) {
-    if (list.length === 0) { return acc }</span>
-    return <span class="fragment highlight-bg-red" data-fragment-index="4">reverse</span>(<span class="fragment highlight-bg-blue" data-fragment-index="5">list.slice(1)</span>, <span class="fragment highlight-bg-purple" data-fragment-index="6">[list[0]].concat(acc)</span>);
+  if (list.length === 0) { return acc }</span>
+  return <span class="fragment highlight-bg-red" data-fragment-index="4">reverse</span>(<span class="fragment highlight-bg-blue" data-fragment-index="5">list.slice(1)</span>, <span class="fragment highlight-bg-purple" data-fragment-index="6">[list[0]].concat(acc)</span>);
 };
 reverse([1, 2, 3], []); // [3, 2, 1]</span>
 
@@ -544,29 +544,29 @@ reverse([1, 2, 3], []); // [3, 2, 1]</span>
                                             <h2>Defining Fold</h2>
                                            <pre><code data-noescape class="javascript">
 var foldL = <span class="fragment highlight-bg-green" data-fragment-index="1">function(func, acc, list) {
-    if (list.length === 0) { return acc }</span>
-    return <span class="fragment highlight-bg-red" data-fragment-index="2">foldL</span>(func, <span class="fragment highlight-bg-purple" data-fragment-index="4">func(acc, list[0])</span>, <span class="fragment highlight-bg-blue" data-fragment-index="3">list.slice(1)</span>);
+  if (list.length === 0) { return acc }</span>
+  return <span class="fragment highlight-bg-red" data-fragment-index="2">foldL</span>(func, <span class="fragment highlight-bg-purple" data-fragment-index="4">func(acc, list[0])</span>, <span class="fragment highlight-bg-blue" data-fragment-index="3">list.slice(1)</span>);
 };
 var sum = function(list) { 
-    return foldL(<span class="fragment highlight-bg-purple" data-fragment-index="11">function(acc, x)</span> { return acc + x }, 0, list);
+  return foldL(<span class="fragment highlight-bg-purple" data-fragment-index="11">function(acc, x)</span> { return acc + x }, 0, list);
 };
 sum([1, 2, 3]);
 // 6 = (((0 + 1) + 2) + 3)
 <span class="fragment initial-back" data-fragment-index="6" id="foldRight">
 var foldR = <span class="fragment highlight-bg-green" data-fragment-index="7">function(func, acc, list) {
-    if (list.length === 0) { return acc }</span>
-    return <span class="fragment highlight-bg-purple" data-fragment-index="10">func(list[0], <span class="fragment highlight-bg-red" data-fragment-index="9">foldR</span>(func, acc, <span class="fragment highlight-bg-blue" data-fragment-index="8">list.slice(1)</span>));</span>
+  if (list.length === 0) { return acc }</span>
+  return <span class="fragment highlight-bg-purple" data-fragment-index="10">func(list[0], <span class="fragment highlight-bg-red" data-fragment-index="9">foldR</span>(func, acc, <span class="fragment highlight-bg-blue" data-fragment-index="8">list.slice(1)</span>));</span>
 };
 var sum2 = function(list) {
-    return foldR(<span class="fragment highlight-bg-purple" data-fragment-index="11">function(x, acc)</span> { return x + acc }, 0, list);
+  return foldR(<span class="fragment highlight-bg-purple" data-fragment-index="11">function(x, acc)</span> { return x + acc }, 0, list);
 };
 sum2([1, 2, 3]);
 // 6 = (1 + (2 + (3 + 0)))</span>
 <span class="fragment initial-front" data-fragment-index="5" id="foldLeftLoop">var foldL2 = function(func, acc, list) {
-    for(var i = 0; i < list.length; i++) {
-        acc = func(acc, list[i]);
-    }
-    return acc;
+  for(var i = 0; i < list.length; i++) {
+    acc = func(acc, list[i]);
+  }
+  return acc;
 };
 
 
@@ -577,7 +577,7 @@ sum2([1, 2, 3]);
                                              <pre><code data-noescape class="javascript">
 // Prepend element
 var cons = function(element, list) {
-    return [element].concat(list);
+  return [element].concat(list);
 }
 
 foldL(function(acc, x) { return cons(x, acc) }, [], [1, 2, 3]);
@@ -604,21 +604,21 @@ foldR(function(x, acc) { return cons(x, acc) }, [], [1, 2, 3]);
                                             <h2>Defining Map/Filter with Fold</h2>
                                             <pre><code data-noescape class="javascript">var list = ['Map', 'Filter', 'Fold'];
 var cons = function(element, list) {
-    return [element].concat(list);
+  return [element].concat(list);
 };
 
 <span class="fragment">var map = function(func, list) {
-    return foldR(function(x, acc) { 
-        <span class="fragment highlight-bg-green">return cons(func(x), acc);</span> 
-    }, [], list);
+  return foldR(function(x, acc) { 
+    <span class="fragment highlight-bg-green">return cons(func(x), acc);</span> 
+  }, [], list);
 };
 map(function(str) { return str.toUpperCase() }, list);
 // ['MAP', 'FILTER', 'FOLD']</span>
 
 <span class="fragment">var filter = function(pred, list) {
-    return foldR(function(x, acc) { 
-        <span class="fragment highlight-bg-green">return pred(x) ? cons(x, acc) : acc;</span> 
-    }, [], list);
+  return foldR(function(x, acc) { 
+    <span class="fragment highlight-bg-green">return pred(x) ? cons(x, acc) : acc;</span> 
+  }, [], list);
 };
 filter(function(str) { return str.charAt(0) === 'M' }, list);
 // ['Map']</span></code></pre>
