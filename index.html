@@ -437,8 +437,8 @@ var imperative = function(list, letter) {
 
 <span class="fragment">var functional = function(list, letter) {
   return _.filter(list, startsWith(letter));
-};</span>
-<span class="fragment">var startsWith = function(l) { 
+};
+var startsWith = function(l) { 
   return function(s) { return s.charAt(0) === l }
 };
 </span><span class="fragment">
