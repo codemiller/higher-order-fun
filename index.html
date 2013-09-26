@@ -593,7 +593,7 @@ foldR(function(x, acc) { return cons(x, acc) }, [], [1, 2, 3]);
                                 </code></pre>
                                         </section>
                                         <section>
-                                            <h2>More About Fold</h2> 
+                                            <h2>Fold Left and Fold Right<h2> 
                                             <ul>
                                                 <li>Fold Left is left associative; Fold Right is right associative</li>
                                                 <li>Fold Right can be implemented with Fold Left and Reverse, provided you are working with finite data structures; in Haskell, Fold Right can potentially operate on infinite lazy structures, while Fold Left cannot</li>
